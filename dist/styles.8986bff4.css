@@ -37,6 +37,7 @@ h1 {
 
 .heading {
     display: flex;
+    justify-content: space-between;
 }
 
 .profile_image {
@@ -45,7 +46,7 @@ h1 {
 }
 
 .header {
-    margin-block-start: 8px;
+    margin-block-start: 12px;
     margin-inline-start: 16px;
 }
 
@@ -78,6 +79,20 @@ ul {
 
 li {
     list-style: none;
+}
+
+h4 {
+    font-size: 18px;
+    margin-block-end: 0;
+}
+
+.friends {
+    display: flex;
+    justify-content: space-between;
+}
+
+.date {
+    margin-block-start: 18px;
 }
 
 input[type="text"] {

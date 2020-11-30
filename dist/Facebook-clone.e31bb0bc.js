@@ -33886,7 +33886,7 @@ function Header() {
 },{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"PostData.json":[function(require,module,exports) {
 module.exports = [{
   "userName": "Clopedia Nomenjanahary",
-  "date": "",
+  "date": "30/11/2020",
   "legend": "Cool day 💥⛅⛅",
   "image": "https://eternalarrival.com/wp-content/uploads/2020/07/Copy-of-Untitled-Design-3.jpg",
   "likes": "5",
@@ -33899,7 +33899,7 @@ module.exports = [{
   "id": "1606718446833"
 }, {
   "userName": "Clopedia Nomenjanahary",
-  "date": "",
+  "date": "29/11/2020",
   "legend": "Jejus is my saviour 🙏🙏",
   "image": "https://www.livingfaith.in/uploads/news/newsc74854dac423ba57b2b79fa89ae5f8ad.jpg",
   "likes": "4",
@@ -33912,7 +33912,7 @@ module.exports = [{
   "id": "1606718473274"
 }, {
   "userName": "Clopedia Nomenjanahary",
-  "date": "",
+  "date": "15/11/20",
   "legend": "Not perfect 😂🤣",
   "image": "https://onja.org/wp-content/uploads/2019/08/Clopedia@2x-430x520.jpg",
   "likes": "10",
@@ -34020,7 +34020,19 @@ function FeedItem() {
       className: "likebtn"
     }, "Likes"), /*#__PURE__*/_react.default.createElement("span", {
       className: "likes_number"
-    }, post.likes)), /*#__PURE__*/_react.default.createElement("nav", null, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, post.userName1), /*#__PURE__*/_react.default.createElement("span", null)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, post.comment1))), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, post.userName2), /*#__PURE__*/_react.default.createElement("span", null)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, post.comment2))))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("input", {
+    }, post.likes)), /*#__PURE__*/_react.default.createElement("nav", null, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("div", {
+      className: "friends"
+    }, /*#__PURE__*/_react.default.createElement("h4", null, post.userName1), /*#__PURE__*/_react.default.createElement("span", {
+      className: "date"
+    }, post.date)), /*#__PURE__*/_react.default.createElement("div", {
+      className: "comments"
+    }, /*#__PURE__*/_react.default.createElement("p", null, post.comment1))), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("div", {
+      className: "friends"
+    }, /*#__PURE__*/_react.default.createElement("h4", null, post.userName2), /*#__PURE__*/_react.default.createElement("span", {
+      className: "date"
+    }, post.date)), /*#__PURE__*/_react.default.createElement("div", {
+      className: "comments"
+    }, /*#__PURE__*/_react.default.createElement("p", null, post.comment2))))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("input", {
       type: "text",
       className: "add_comment",
       placeholder: "Add a comment..."
@@ -34153,7 +34165,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57893" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60748" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

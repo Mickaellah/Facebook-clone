@@ -25,20 +25,20 @@ export default function FeedItem() {
                             <nav>
                                 <ul>
                                     <li>
-                                        <div>
+                                        <div className="friends">
                                             <h4>{post.userName1}</h4>
-                                            <span></span>
+                                            <span className="date">{post.date}</span>
                                         </div>
-                                        <div>
+                                        <div className="comments">
                                             <p>{post.comment1}</p>
                                         </div>
                                     </li>
                                     <li>
-                                        <div>
+                                        <div className="friends">
                                             <h4>{post.userName2}</h4>
-                                            <span></span>
+                                            <span className="date">{post.date}</span>
                                         </div>
-                                        <div>
+                                        <div className="comments">
                                             <p>{post.comment2}</p>
                                         </div>
                                     </li>
