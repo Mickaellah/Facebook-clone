@@ -8,6 +8,20 @@ body {
     padding-block: 32px;
 }
 
+.heading {
+    display: flex;
+}
+
+.profile_image {
+    width: 10%;
+    border-radius: 50%;
+}
+
+.header {
+    margin-block-start: 8px;
+    margin-inline-start: 16px;
+}
+
 img {
     width: 50%;
     height: 50%;

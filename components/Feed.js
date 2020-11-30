@@ -8,18 +8,18 @@ import {
 
 import Header from './Header';
 
-import Feed from '../pages/Feed';
+import FeedItem from '../pages/FeedItem';
 import Add from '../pages/Add';
 import Option from '../pages/Option';
 
-export default function Main() {
+export default function Feed() {
     return (
         <>
             <Router>
                 <Header />
                 <Switch>
                     <Route exact path="/">
-                        <Feed />
+                        <FeedItem />
                     </Route>
                     <Route exact path="/add">
                         <Add />

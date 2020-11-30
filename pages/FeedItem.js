@@ -1,15 +1,18 @@
 import React, {useContext} from 'react';
 import {Context} from '../Context';
 
-export default function Feed() {
+import Hary from '../img/hary.jpg';
+
+export default function FeedItem() {
     const context = useContext(Context);
     return (
         <div>
             {context.posts.map((post) => {
                 return (
                     <article key={post.id} className="post">
-                        <div>
-                            <h3>{post.userName}</h3>
+                        <div className="heading">
+                            <img className="profile_image" src={Hary} alt="Profile" />
+                            <h3 className="header">{post.userName}</h3>
                             <p>{post.date}</p>
                         </div>
                         <div>

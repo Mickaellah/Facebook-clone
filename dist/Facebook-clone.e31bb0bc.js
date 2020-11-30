@@ -33878,7 +33878,6 @@ function Header() {
 }
 },{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"PostData.json":[function(require,module,exports) {
 module.exports = [{
-  "profile": "",
   "userName": "Clopedia Nomenjanahary",
   "date": "",
   "legend": "Cool day 💥⛅⛅",
@@ -33892,7 +33891,6 @@ module.exports = [{
   "comment2": "Jolie",
   "id": "1606718446833"
 }, {
-  "profile": "",
   "userName": "Clopedia Nomenjanahary",
   "date": "",
   "legend": "Jejus is my saviour 🙏🙏",
@@ -33906,7 +33904,6 @@ module.exports = [{
   "comment2": "perfect",
   "id": "1606718473274"
 }, {
-  "profile": "",
   "userName": "Clopedia Nomenjanahary",
   "date": "",
   "legend": "Not perfect 😂🤣",
@@ -33970,29 +33967,43 @@ function ContextProvider(props) {
     }
   }, props.children);
 }
-},{"react":"node_modules/react/index.js","./PostData.json":"PostData.json"}],"pages/Feed.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./PostData.json":"PostData.json"}],"img/hary.jpg":[function(require,module,exports) {
+module.exports = "/hary.59a3fc19.jpg";
+},{}],"pages/FeedItem.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = Feed;
+exports.default = FeedItem;
 
 var _react = _interopRequireWildcard(require("react"));
 
 var _Context = require("../Context");
 
+var _hary = _interopRequireDefault(require("../img/hary.jpg"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function Feed() {
+function FeedItem() {
   var context = (0, _react.useContext)(_Context.Context);
   return /*#__PURE__*/_react.default.createElement("div", null, context.posts.map(function (post) {
     return /*#__PURE__*/_react.default.createElement("article", {
       key: post.id,
       className: "post"
-    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h3", null, post.userName), /*#__PURE__*/_react.default.createElement("p", null, post.date)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, post.legend), /*#__PURE__*/_react.default.createElement("img", {
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "heading"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      className: "profile_image",
+      src: _hary.default,
+      alt: "Profile"
+    }), /*#__PURE__*/_react.default.createElement("h3", {
+      className: "header"
+    }, post.userName), /*#__PURE__*/_react.default.createElement("p", null, post.date)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, post.legend), /*#__PURE__*/_react.default.createElement("img", {
       src: "".concat(post.image),
       alt: "Post"
     }), /*#__PURE__*/_react.default.createElement("div", {
@@ -34013,7 +34024,7 @@ function Feed() {
     }))));
   }));
 }
-},{"react":"node_modules/react/index.js","../Context":"Context.js"}],"pages/Add.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../Context":"Context.js","../img/hary.jpg":"img/hary.jpg"}],"pages/Add.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34043,13 +34054,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function Option() {
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Option"));
 }
-},{"react":"node_modules/react/index.js"}],"components/Main.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"components/Feed.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = Main;
+exports.default = Feed;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -34057,7 +34068,7 @@ var _reactRouterDom = require("react-router-dom");
 
 var _Header = _interopRequireDefault(require("./Header"));
 
-var _Feed = _interopRequireDefault(require("../pages/Feed"));
+var _FeedItem = _interopRequireDefault(require("../pages/FeedItem"));
 
 var _Add = _interopRequireDefault(require("../pages/Add"));
 
@@ -34065,18 +34076,18 @@ var _Option = _interopRequireDefault(require("../pages/Option"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Main() {
+function Feed() {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.BrowserRouter, null, /*#__PURE__*/_react.default.createElement(_Header.default, null), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/"
-  }, /*#__PURE__*/_react.default.createElement(_Feed.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  }, /*#__PURE__*/_react.default.createElement(_FeedItem.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/add"
   }, /*#__PURE__*/_react.default.createElement(_Add.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/option"
   }, /*#__PURE__*/_react.default.createElement(_Option.default, null)))));
 }
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./Header":"components/Header.js","../pages/Feed":"pages/Feed.js","../pages/Add":"pages/Add.js","../pages/Option":"pages/Option.js"}],"App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./Header":"components/Header.js","../pages/FeedItem":"pages/FeedItem.js","../pages/Add":"pages/Add.js","../pages/Option":"pages/Option.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34086,14 +34097,14 @@ exports.default = App;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _Main = _interopRequireDefault(require("./components/Main"));
+var _Feed = _interopRequireDefault(require("./components/Feed"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function App() {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Main.default, null));
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Feed.default, null));
 }
-},{"react":"node_modules/react/index.js","./components/Main":"components/Main.js"}],"index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./components/Feed":"components/Feed.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -34135,7 +34146,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51484" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57893" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

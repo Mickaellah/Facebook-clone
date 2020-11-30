@@ -1,11 +1,11 @@
 import React from 'react'
 
-import Main from './components/Main';
+import Feed from './components/Feed';
 
 export default function App() {
     return (
         <>
-            <Main />
+            <Feed />
         </>
     )
 }
