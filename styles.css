@@ -1,0 +1,65 @@
+body {
+    margin: 0;
+    padding: 32px;
+}
+
+.post {
+    border-bottom: 2px solid gray;
+    padding-block: 32px;
+}
+
+img {
+    width: 50%;
+    height: 50%;
+}
+
+.likes {
+    margin-block-start: 32px;
+}
+
+.likebtn {
+    padding-block: 5px;
+    padding-inline: 8px;
+    border-radius: 5px;
+    border: none;
+    background-color: blue;
+    color: white;
+}
+
+.likes_number {
+    margin-inline-start: 32px;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
+input[type="text"] {
+    font-family: 'Poppins_medium';
+    padding-right: 30%;
+    padding-block-start: 12px;
+    padding-block-end: 12px;
+    border-radius: 12px;
+    border: none;
+    background-color: #f2f2f2;
+    padding-inline-start: 16px;
+    color: #dbdbdb;
+    margin-block-start: 8px;
+}
+
+input[type="submit"] {
+    font-family: 'Poppins_medium';
+    margin-left: -90px;
+    background-color: white;
+    color: black;
+    border: 0;
+    padding-inline: 16px;
+    padding-block: 9px;
+    border-radius: 12px;
+    -webkit-appearance: none;
+}

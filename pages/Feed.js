@@ -7,23 +7,23 @@ export default function Feed() {
         <div>
             {context.posts.map((post) => {
                 return (
-                    <article key={post.id}>
+                    <article key={post.id} className="post">
                         <div>
-                            <p>{post.userName}</p>
+                            <h3>{post.userName}</h3>
                             <p>{post.date}</p>
                         </div>
                         <div>
                             <p>{post.legend}</p>
                             <img src={`${post.image}`} alt="Post" />
                             <div className="likes">
-                                <button type="button">Likes</button>
-                                <span>{post.likes}</span>
+                                <button type="button" className="likebtn">Likes</button>
+                                <span className="likes_number">{post.likes}</span>
                             </div>
                             <nav>
                                 <ul>
                                     <li>
                                         <div>
-                                            <p>{post.userName1}</p>
+                                            <h4>{post.userName1}</h4>
                                             <span></span>
                                         </div>
                                         <div>
@@ -32,7 +32,7 @@ export default function Feed() {
                                     </li>
                                     <li>
                                         <div>
-                                            <p>{post.userName2}</p>
+                                            <h4>{post.userName2}</h4>
                                             <span></span>
                                         </div>
                                         <div>
@@ -42,8 +42,8 @@ export default function Feed() {
                                 </ul>
                             </nav>
                             <div>
-                                <input type="text" placeholder="Add a comment..." />
-                                <input type="submit" placeholder="Post" />
+                                <input type="text" className="add_comment" placeholder="Add a comment..." />
+                                <input type="submit" className="submit_comment" placeholder="Post" />
                             </div>
                         </div>
                     </article>
