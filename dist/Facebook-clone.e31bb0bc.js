@@ -33965,12 +33965,28 @@ function ContextProvider(props) {
       posts = _useState2[0],
       setPosts = _useState2[1];
 
+  var _useState3 = (0, _react.useState)(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      like = _useState4[0],
+      setLike = _useState4[1];
+
   (0, _react.useEffect)(function () {
     setPosts(_PostData.default);
   }, [posts]);
+
+  function likes(e) {
+    var id = e.target.id;
+    var findId = posts.find(function (post) {
+      return post.id == id;
+    });
+    var favorite = findId.likes++;
+    setLike(favorite);
+  }
+
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
-      posts: posts
+      posts: posts,
+      likes: likes
     }
   }, props.children);
 }
@@ -33998,6 +34014,10 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function FeedItem() {
   var context = (0, _react.useContext)(_Context.Context);
+
+  var _useContext = (0, _react.useContext)(_Context.Context),
+      likes = _useContext.likes;
+
   return /*#__PURE__*/_react.default.createElement("div", null, context.posts.map(function (post) {
     return /*#__PURE__*/_react.default.createElement("article", {
       key: post.id,
@@ -34017,6 +34037,8 @@ function FeedItem() {
       className: "likes"
     }, /*#__PURE__*/_react.default.createElement("button", {
       type: "button",
+      onClick: likes,
+      id: post.id,
       className: "likebtn"
     }, "Likes"), /*#__PURE__*/_react.default.createElement("span", {
       className: "likes_number"
