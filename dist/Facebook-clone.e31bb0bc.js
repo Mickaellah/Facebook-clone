@@ -33868,13 +33868,20 @@ var _reactRouterDom = require("react-router-dom");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Header() {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h1", null, "OnjaBook")), /*#__PURE__*/_react.default.createElement("nav", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/"
-  }, "Feed"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/add"
-  }, "Add post"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/option"
-  }, "Option")));
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "main_heading"
+  }, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h1", null, "OnjaBook")), /*#__PURE__*/_react.default.createElement("nav", null, /*#__PURE__*/_react.default.createElement("ul", {
+    className: "navigation"
+  }, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/",
+    className: "link"
+  }, "Feed")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/add",
+    className: "link"
+  }, "Add post")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/option",
+    className: "link"
+  }, "Option")))));
 }
 },{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"PostData.json":[function(require,module,exports) {
 module.exports = [{

@@ -1,11 +1,38 @@
 body {
     margin: 0;
-    padding: 32px;
+}
+
+h1 {
+    margin: 0;
+}
+
+.main_heading {
+    display: flex;
+    justify-content: space-between;
+    margin-block-start: 32px;
+}
+
+.navigation {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 32px;
+    column-gap: 32px;
+    margin-block-start: 8px;
+}
+
+.link{
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+}
+
+.link:hover {
+    font-weight: bold;
 }
 
 .post {
     border-bottom: 2px solid gray;
-    padding-block: 32px;
+    padding: 32px;
 }
 
 .heading {
