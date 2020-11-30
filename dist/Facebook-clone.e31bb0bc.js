@@ -33890,11 +33890,11 @@ module.exports = [{
   "legend": "Cool day 💥⛅⛅",
   "image": "https://eternalarrival.com/wp-content/uploads/2020/07/Copy-of-Untitled-Design-3.jpg",
   "likes": "5",
-  "profile1": "",
-  "userName1": "Prisca",
+  "profile1": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMuwgpNnHi__OF6xVfWRfr9rsJlGrIz7NjZw&usqp=CAU",
+  "userName1": "Prisca Valie",
   "comment1": "Nice pic!!!",
-  "profile2": "",
-  "userName2": "Volana",
+  "profile2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT54bvr7pIzWLEn_g7Geal73PV22weHVb72-Q&usqp=CAU",
+  "userName2": "Volana Sariaka",
   "comment2": "Jolie",
   "id": "1606718446833"
 }, {
@@ -33903,12 +33903,12 @@ module.exports = [{
   "legend": "Jejus is my saviour 🙏🙏",
   "image": "https://www.livingfaith.in/uploads/news/newsc74854dac423ba57b2b79fa89ae5f8ad.jpg",
   "likes": "4",
-  "profile1": "",
+  "profile1": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3_sBEtoIQR-ZEBJHUOwSLklgGnsDORKruzA&usqp=CAU",
   "userName1": "Angellot",
-  "comment1": "Cool",
-  "profile2": "",
-  "userName2": "Mamy",
-  "comment2": "Our saviour",
+  "comment1": "Cool 😘",
+  "profile2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhlgUH60e4kp1QRAeZ5H3tmWNs2bkT9p2bdw&usqp=CAU",
+  "userName2": "Mamy Ambinintsoa",
+  "comment2": "Our saviour 🙏",
   "id": "1606718473274"
 }, {
   "userName": "Clopedia Nomenjanahary",
@@ -33916,12 +33916,12 @@ module.exports = [{
   "legend": "Not perfect 😂🤣",
   "image": "https://onja.org/wp-content/uploads/2019/08/Clopedia@2x-430x520.jpg",
   "likes": "10",
-  "profile1": "",
-  "userName1": "Edra",
-  "comment1": "Love it",
-  "profile2": "",
-  "userName2": "Tsiory",
-  "comment2": "Top",
+  "profile1": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG8ZKQ-XPZIXHW2BSRRgBG7SOQbTa1-M2Kyw&usqp=CAU",
+  "userName1": "Edra Lafuma",
+  "comment1": "Love it ❤❤",
+  "profile2": "https://i.pinimg.com/170x/52/a7/22/52a72234e045ce04d21704fc2b7334bd.jpg",
+  "userName2": "Tsiory Mickael",
+  "comment2": "Top 😍😍",
   "id": "1606718492294"
 }];
 },{}],"Context.js":[function(require,module,exports) {
@@ -34042,15 +34042,25 @@ function FeedItem() {
       className: "likebtn"
     }, "Likes"), /*#__PURE__*/_react.default.createElement("span", {
       className: "likes_number"
-    }, post.likes)), /*#__PURE__*/_react.default.createElement("nav", null, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("div", {
+    }, post.likes)), /*#__PURE__*/_react.default.createElement("nav", {
+      className: "comments_container"
+    }, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("div", {
       className: "friends"
-    }, /*#__PURE__*/_react.default.createElement("h4", null, post.userName1), /*#__PURE__*/_react.default.createElement("span", {
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      className: "first_coment",
+      src: post.profile1,
+      alt: "pofile1"
+    }), /*#__PURE__*/_react.default.createElement("h4", null, post.userName1), /*#__PURE__*/_react.default.createElement("span", {
       className: "date"
     }, post.date)), /*#__PURE__*/_react.default.createElement("div", {
       className: "comments"
     }, /*#__PURE__*/_react.default.createElement("p", null, post.comment1))), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("div", {
       className: "friends"
-    }, /*#__PURE__*/_react.default.createElement("h4", null, post.userName2), /*#__PURE__*/_react.default.createElement("span", {
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: post.profile2,
+      className: "second_comment",
+      alt: "pofile1"
+    }), /*#__PURE__*/_react.default.createElement("h4", null, post.userName2), /*#__PURE__*/_react.default.createElement("span", {
       className: "date"
     }, post.date)), /*#__PURE__*/_react.default.createElement("div", {
       className: "comments"

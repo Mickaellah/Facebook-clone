@@ -23,10 +23,11 @@ export default function FeedItem() {
                                 <button type="button" onClick={likes} id={post.id} className="likebtn">Likes</button>
                                 <span className="likes_number">{post.likes}</span>
                             </div>
-                            <nav>
+                            <nav className="comments_container">
                                 <ul>
                                     <li>
                                         <div className="friends">
+                                            <img className="first_coment" src={post.profile1} alt="pofile1"/>
                                             <h4>{post.userName1}</h4>
                                             <span className="date">{post.date}</span>
                                         </div>
@@ -36,6 +37,7 @@ export default function FeedItem() {
                                     </li>
                                     <li>
                                         <div className="friends">
+                                            <img src={post.profile2} className="second_comment" alt="pofile1"/>
                                             <h4>{post.userName2}</h4>
                                             <span className="date">{post.date}</span>
                                         </div>
