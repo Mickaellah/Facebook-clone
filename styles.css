@@ -9,6 +9,10 @@ h1 {
     margin: 0;
 }
 
+button {
+    cursor: pointer;
+}
+
 .main_heading {
     display: flex;
     justify-content: space-between;
@@ -36,6 +40,10 @@ h1 {
 .post {
     border-bottom: 2px solid gray;
     padding: 32px;
+    margin-block: 32px;
+    border-radius: 12px;
+    box-shadow: 5px 5px 5px lightgray;
+
 }
 
 .heading {
@@ -67,8 +75,8 @@ img {
     padding-inline: 8px;
     border-radius: 5px;
     border: none;
-    background-color: blue;
-    color: white;
+    background-color: skyblue;
+    color: black;
 }
 
 .likes_number {
@@ -134,4 +142,50 @@ input[type="submit"] {
     padding-block: 9px;
     border-radius: 12px;
     -webkit-appearance: none;
+}
+
+.submit_form {
+    padding: 32px;
+}
+
+.textarea {
+    border: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.input_profile {
+    display: flex;
+    justify-content: space-between;
+    border: none;
+}
+
+.input_profile > label {
+    margin-block-start: 8px;
+}
+
+.statu {
+    margin-block-start: 16px;
+    background-color: lightgray;
+    border: none;
+    border-radius: 8px;
+}
+
+.image_url {
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: lightgray;
+    width: 70%;
+}
+
+.submitBttn {
+    padding-block: 12px;
+    padding-inline: 24px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 3px 2px 3px gray;
+    background-color: skyblue;
+    margin-block-start: 32px;
+    margin-inline-start: 80%;
 }
