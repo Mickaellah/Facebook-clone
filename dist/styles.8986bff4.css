@@ -1,5 +1,8 @@
 body {
     margin: 0;
+    max-width: 500px;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
 }
 
 h1 {
@@ -51,8 +54,7 @@ h1 {
 }
 
 img {
-    width: 50%;
-    height: 50%;
+    width: 100%;
 }
 
 .likes {

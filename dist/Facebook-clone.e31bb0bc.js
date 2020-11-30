@@ -33905,10 +33905,10 @@ module.exports = [{
   "likes": "4",
   "profile1": "",
   "userName1": "Angellot",
-  "comment1": "cool",
+  "comment1": "Cool",
   "profile2": "",
   "userName2": "Mamy",
-  "comment2": "perfect",
+  "comment2": "Our saviour",
   "id": "1606718473274"
 }, {
   "userName": "Clopedia Nomenjanahary",
