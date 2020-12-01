@@ -20,10 +20,16 @@ export default function FeedItem() {
                                 <img src={`${post.image}`} alt="Post" />
                                 <div className="likes">
                                     <button type="button" onClick={likes} id={post.id} className="likebtn">Likes</button>
-                                    <span className="likes_number">{post.likes}</span>
+                                    {
+                                        post.likes.map(like => {
+                                            return (
+                                                <span key={like.likedId} className="likes_number">{post.count}</span>
+                                            )
+                                        })
+                                    }
                                 </div>
                                 <div className="comments_container">
-                                    {post.comment.map((comment) => 
+                                    {post.comments.map((comment) => 
                                         <div key={comment.id}>
                                             <div className="friends">
                                                 <img className="profile_picture" src={comment.profile} alt="profile picture" />

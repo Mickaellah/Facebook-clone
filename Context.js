@@ -16,7 +16,7 @@ function ContextProvider(props) {
     function likes(e) {
         const id = e.target.id;
         const findId = posts.find(post => post.id == id);
-        const favorite = findId.likes++;
+        const favorite = findId.likes.count++;
         console.log(favorite);
         setLike(favorite);
     }
@@ -43,7 +43,6 @@ function ContextProvider(props) {
 
     function addNewPost(e) {
         e.preventDefault();
-        // const [image, legend] = e.target;
 
         const newPost = {
             "id": Date.now(),
