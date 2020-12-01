@@ -26,18 +26,18 @@ export default function FeedItem() {
                                 </div>
                                 <div className="comments_container">
                                     {post.comment.map((comment) => 
-                                            <div>
-                                                <div className="friends">
-                                                    <img className="profile_picture" src={comment.profile} alt="profile picture" />
-                                                    <h4>{comment.userName}</h4>
-                                                    <span className="date">{comment.date}</span>
-                                                </div>
-                                                    <div>
-                                                        <p className="comments">
-                                                            {comment.comment}
-                                                        </p>
-                                                    </div>
+                                        <div key={comment.id}>
+                                            <div className="friends">
+                                                <img className="profile_picture" src={comment.profile} alt="profile picture" />
+                                                <h4>{comment.userName}</h4>
+                                                <span className="date">{comment.date}</span>
                                             </div>
+                                                <div>
+                                                    <p className="comments">
+                                                        {comment.comment}
+                                                    </p>
+                                                </div>
+                                        </div>
                                     )}
                                 </div>
                                 <div>

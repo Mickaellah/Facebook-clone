@@ -20,7 +20,7 @@ function ContextProvider(props) {
 
     function addNewPost(e) {
         e.preventDefault();
-        const {legend, image} = e.target;
+        const [legend, image] = e.target;
 
         const newPost = {
             id: Date.now(),
@@ -29,17 +29,20 @@ function ContextProvider(props) {
             date: Date.now(),
             legend: legend.value,
             image: image.value,
-            profile1: "",
-            userName1: "",
-            comment1: "",
-            profile2: "",
-            userName2: "",
-            comment2: ""
+            comment: [
+                {
+                    profile: "",
+                    userName: "",
+                    comment: "",
+                    date: ""
+                }
+            ]
         }
 
-        console.log(newPost);
+        posts.push(newPost);
 
-        setPosts([...posts, newPost]);
+        setPosts([...posts]);
+        console.log(posts);
     }
 
     return (

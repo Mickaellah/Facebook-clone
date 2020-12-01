@@ -33891,11 +33891,13 @@ module.exports = [{
   "image": "https://eternalarrival.com/wp-content/uploads/2020/07/Copy-of-Untitled-Design-3.jpg",
   "likes": "5",
   "comment": [{
+    "id": "1606801488981",
     "profile": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMuwgpNnHi__OF6xVfWRfr9rsJlGrIz7NjZw&usqp=CAU",
     "userName": "Prisca Valie",
     "comment": "Nice pic!!!",
     "date": "30/11/2020"
   }, {
+    "id": "1606801503504",
     "profile": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT54bvr7pIzWLEn_g7Geal73PV22weHVb72-Q&usqp=CAU",
     "userName": "Volana Sariaka",
     "comment": "Jolie",
@@ -33909,11 +33911,13 @@ module.exports = [{
   "image": "https://www.livingfaith.in/uploads/news/newsc74854dac423ba57b2b79fa89ae5f8ad.jpg",
   "likes": "4",
   "comment": [{
+    "id": "1606801523412",
     "profile": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3_sBEtoIQR-ZEBJHUOwSLklgGnsDORKruzA&usqp=CAU",
     "userName": "Angellot",
     "comment": "Cool 😘",
     "date": "29/11/2020"
   }, {
+    "id": "1606801536655",
     "profile": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhlgUH60e4kp1QRAeZ5H3tmWNs2bkT9p2bdw&usqp=CAU",
     "userName": "Mamy Ambinintsoa",
     "comment": "Our saviour 🙏",
@@ -33927,11 +33931,13 @@ module.exports = [{
   "image": "https://onja.org/wp-content/uploads/2019/08/Clopedia@2x-430x520.jpg",
   "likes": "10",
   "comment": [{
+    "id": "1606801547948",
     "profile": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG8ZKQ-XPZIXHW2BSRRgBG7SOQbTa1-M2Kyw&usqp=CAU",
     "userName": "Edra Lafuma",
     "comment": "Love it ❤❤",
     "date": "15/11/2020"
   }, {
+    "id": "1606801572601",
     "profile": "https://i.pinimg.com/170x/52/a7/22/52a72234e045ce04d21704fc2b7334bd.jpg",
     "userName": "Tsiory Mickael",
     "comment": "Top 😍😍",
@@ -34008,9 +34014,11 @@ function ContextProvider(props) {
 
   function addNewPost(e) {
     e.preventDefault();
-    var _e$target = e.target,
-        legend = _e$target.legend,
-        image = _e$target.image;
+
+    var _e$target = _slicedToArray(e.target, 2),
+        legend = _e$target[0],
+        image = _e$target[1];
+
     var newPost = {
       id: Date.now(),
       likes: 0,
@@ -34018,15 +34026,16 @@ function ContextProvider(props) {
       date: Date.now(),
       legend: legend.value,
       image: image.value,
-      profile1: "",
-      userName1: "",
-      comment1: "",
-      profile2: "",
-      userName2: "",
-      comment2: ""
+      comment: [{
+        profile: "",
+        userName: "",
+        comment: "",
+        date: ""
+      }]
     };
-    console.log(newPost);
-    setPosts([].concat(_toConsumableArray(posts), [newPost]));
+    posts.push(newPost);
+    setPosts(_toConsumableArray(posts));
+    console.log(posts);
   }
 
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
@@ -34092,7 +34101,9 @@ function FeedItem() {
     }, post.likes)), /*#__PURE__*/_react.default.createElement("div", {
       className: "comments_container"
     }, post.comment.map(function (comment) {
-      return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+      return /*#__PURE__*/_react.default.createElement("div", {
+        key: comment.id
+      }, /*#__PURE__*/_react.default.createElement("div", {
         className: "friends"
       }, /*#__PURE__*/_react.default.createElement("img", {
         className: "profile_picture",
@@ -34134,7 +34145,7 @@ function Add() {
   var _useContext = (0, _react.useContext)(_Context.Context),
       addNewPost = _useContext.addNewPost;
 
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("form", {
+  return /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: addNewPost,
     className: "submit_form"
   }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("fieldset", {
@@ -34155,7 +34166,7 @@ function Add() {
   }))), /*#__PURE__*/_react.default.createElement("button", {
     className: "submitBttn",
     type: "submit"
-  }, "Post")));
+  }, "Post"));
 }
 },{"react":"node_modules/react/index.js","../Context":"Context.js"}],"pages/Option.js":[function(require,module,exports) {
 "use strict";
@@ -34264,7 +34275,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50417" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55214" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
