@@ -6,6 +6,8 @@ const Context = React.createContext();
 function ContextProvider(props) {
     const [posts, setPosts] = useState([]);
     const [like, setLike] = useState(0);
+    const [newPosts, setNewPosts] = useState('');
+    const [newUrl, setNewUrl] = useState('');
 
     useEffect(() => {
         setPosts(PostData);
@@ -15,26 +17,48 @@ function ContextProvider(props) {
         const id = e.target.id;
         const findId = posts.find(post => post.id == id);
         const favorite = findId.likes++;
+        console.log(favorite);
         setLike(favorite);
+    }
+
+    function addNewComment(e, id) {
+        e.preventDefault();
+        const {comment} = e.target;
+
+        const newComment = {
+            id: Date.now(),
+            profile: "",
+            userName: "",
+            comment: comment.value,
+            date: ""
+        }
+
+        posts.map(post => {
+            if (post.id === id) {
+                post.comment.push(newComment);
+                setPosts([...post]);
+            }
+        })
     }
 
     function addNewPost(e) {
         e.preventDefault();
-        const [legend, image] = e.target;
+        // const [image, legend] = e.target;
 
         const newPost = {
-            id: Date.now(),
-            likes: 0,
-            userName: "Clopedia Nomenjanahary",
-            date: Date.now(),
-            legend: legend.value,
-            image: image.value,
-            comment: [
+            "id": Date.now(),
+            "userName": "Clopedia Nomenjanahary",
+            "date": new Date(Date.now()).toDateString(),
+            "legend": newPosts,
+            "image": newUrl,
+            "likes": 0,
+            "comment": [
                 {
-                    profile: "",
-                    userName: "",
-                    comment: "",
-                    date: ""
+                    "id": Date.now(),
+                    "profile": "",
+                    "userName": "",
+                    "comment": "",
+                    "date": ""
                 }
             ]
         }
@@ -42,14 +66,23 @@ function ContextProvider(props) {
         posts.push(newPost);
 
         setPosts([...posts]);
-        console.log(posts);
+        e.target.reset();
+    }
+
+    function handleChange(e) {
+        setNewPosts(e.target.value);
+    }
+
+    function handleInput(e) {
+        setNewUrl(e.target.value);
     }
 
     return (
-        <Context.Provider value={{posts, likes, addNewPost}}>
+        <Context.Provider value={{posts, likes, newPosts, handleChange, newUrl, handleInput, addNewPost}}>
             {props.children}
         </Context.Provider>
     )
+    
 }
 
 export {ContextProvider, Context};

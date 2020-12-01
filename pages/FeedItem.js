@@ -1,15 +1,13 @@
 import React, {useContext} from 'react';
 import {Context} from '../Context';
 
-import Hary from '../img/hary.jpg';
-
 export default function FeedItem() {
-    const context = useContext(Context);
-    const {likes} = useContext(Context);
+    const {posts, likes} = useContext(Context);
+    const Hary = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpRVk4ezrG1w_tYe3iURo8AiI1YhfqQmIW_g&usqp=CAU";
     return (
         <div>
             {
-                context.posts.map((post) => {
+                posts.map((post) => {
                     return (
                         <article key={post.id} className="post">
                             <div className="heading">
@@ -41,7 +39,7 @@ export default function FeedItem() {
                                     )}
                                 </div>
                                 <div>
-                                    <input type="text" className="add_comment" placeholder="Add a comment..." />
+                                    <input type="text" name="comment" className="add_comment" placeholder="Add a comment..." required />
                                     <input type="submit" className="submit_comment" placeholder="Post" />
                                 </div>
                             </div>

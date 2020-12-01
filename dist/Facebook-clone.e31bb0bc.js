@@ -33885,65 +33885,65 @@ function Header() {
 }
 },{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"PostData.json":[function(require,module,exports) {
 module.exports = [{
+  "id": 1606718446833,
   "userName": "Clopedia Nomenjanahary",
   "date": "30/11/2020",
   "legend": "Cool day 💥⛅⛅",
   "image": "https://eternalarrival.com/wp-content/uploads/2020/07/Copy-of-Untitled-Design-3.jpg",
-  "likes": "5",
+  "likes": 0,
   "comment": [{
-    "id": "1606801488981",
+    "id": 1606801488981,
     "profile": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMuwgpNnHi__OF6xVfWRfr9rsJlGrIz7NjZw&usqp=CAU",
     "userName": "Prisca Valie",
     "comment": "Nice pic!!!",
     "date": "30/11/2020"
   }, {
-    "id": "1606801503504",
+    "id": 1606801503504,
     "profile": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT54bvr7pIzWLEn_g7Geal73PV22weHVb72-Q&usqp=CAU",
     "userName": "Volana Sariaka",
     "comment": "Jolie",
     "date": "01/12/2020"
-  }],
-  "id": "1606718446833"
+  }]
 }, {
+  "id": 1606718473274,
   "userName": "Clopedia Nomenjanahary",
   "date": "29/11/2020",
   "legend": "Jejus is my saviour 🙏🙏",
   "image": "https://www.livingfaith.in/uploads/news/newsc74854dac423ba57b2b79fa89ae5f8ad.jpg",
-  "likes": "4",
+  "likes": 0,
   "comment": [{
-    "id": "1606801523412",
+    "id": 1606801523412,
     "profile": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3_sBEtoIQR-ZEBJHUOwSLklgGnsDORKruzA&usqp=CAU",
     "userName": "Angellot",
     "comment": "Cool 😘",
     "date": "29/11/2020"
   }, {
-    "id": "1606801536655",
+    "id": 1606801536655,
     "profile": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhlgUH60e4kp1QRAeZ5H3tmWNs2bkT9p2bdw&usqp=CAU",
     "userName": "Mamy Ambinintsoa",
     "comment": "Our saviour 🙏",
     "date": "30/11/2020"
-  }],
-  "id": "1606718473274"
+  }]
 }, {
+  "id": 1606718492294,
   "userName": "Clopedia Nomenjanahary",
-  "date": "15/11/20",
+  "date": "05/11/2020",
   "legend": "Not perfect 😂🤣",
   "image": "https://onja.org/wp-content/uploads/2019/08/Clopedia@2x-430x520.jpg",
-  "likes": "10",
+  "likes": 0,
   "comment": [{
-    "id": "1606801547948",
+    "id": 1606801547948,
     "profile": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG8ZKQ-XPZIXHW2BSRRgBG7SOQbTa1-M2Kyw&usqp=CAU",
     "userName": "Edra Lafuma",
     "comment": "Love it ❤❤",
     "date": "15/11/2020"
   }, {
-    "id": "1606801572601",
+    "id": 1606801572601,
     "profile": "https://i.pinimg.com/170x/52/a7/22/52a72234e045ce04d21704fc2b7334bd.jpg",
     "userName": "Tsiory Mickael",
     "comment": "Top 😍😍",
     "date": "17/11/2020"
-  }],
-  "id": "1606718492294"
+  }]
 }];
 },{}],"Context.js":[function(require,module,exports) {
 "use strict";
@@ -33999,6 +33999,16 @@ function ContextProvider(props) {
       like = _useState4[0],
       setLike = _useState4[1];
 
+  var _useState5 = (0, _react.useState)(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      newPosts = _useState6[0],
+      setNewPosts = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      newUrl = _useState8[0],
+      setNewUrl = _useState8[1];
+
   (0, _react.useEffect)(function () {
     setPosts(_PostData.default);
   }, [posts]);
@@ -34009,46 +34019,72 @@ function ContextProvider(props) {
       return post.id == id;
     });
     var favorite = findId.likes++;
+    console.log(favorite);
     setLike(favorite);
   }
 
-  function addNewPost(e) {
+  function addNewComment(e, id) {
     e.preventDefault();
+    var comment = e.target.comment;
+    var newComment = {
+      id: Date.now(),
+      profile: "",
+      userName: "",
+      comment: comment.value,
+      date: ""
+    };
+    posts.map(function (post) {
+      if (post.id === id) {
+        post.comment.push(newComment);
+        setPosts(_toConsumableArray(post));
+      }
+    });
+  }
 
-    var _e$target = _slicedToArray(e.target, 2),
-        legend = _e$target[0],
-        image = _e$target[1];
+  function addNewPost(e) {
+    e.preventDefault(); // const [image, legend] = e.target;
 
     var newPost = {
-      id: Date.now(),
-      likes: 0,
-      userName: "Clopedia Nomenjanahary",
-      date: Date.now(),
-      legend: legend.value,
-      image: image.value,
-      comment: [{
-        profile: "",
-        userName: "",
-        comment: "",
-        date: ""
+      "id": Date.now(),
+      "userName": "Clopedia Nomenjanahary",
+      "date": new Date(Date.now()).toDateString(),
+      "legend": newPosts,
+      "image": newUrl,
+      "likes": 0,
+      "comment": [{
+        "id": Date.now(),
+        "profile": "",
+        "userName": "",
+        "comment": "",
+        "date": ""
       }]
     };
     posts.push(newPost);
     setPosts(_toConsumableArray(posts));
-    console.log(posts);
+    e.target.reset();
+  }
+
+  function handleChange(e) {
+    setNewPosts(e.target.value);
+  }
+
+  function handleInput(e) {
+    setNewUrl(e.target.value);
   }
 
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
       posts: posts,
       likes: likes,
+      newPosts: newPosts,
+      handleChange: handleChange,
+      newUrl: newUrl,
+      handleInput: handleInput,
       addNewPost: addNewPost
     }
   }, props.children);
 }
-},{"react":"node_modules/react/index.js","./PostData.json":"PostData.json"}],"img/hary.jpg":[function(require,module,exports) {
-module.exports = "/hary.59a3fc19.jpg";
-},{}],"pages/FeedItem.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./PostData.json":"PostData.json"}],"pages/FeedItem.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34060,21 +34096,17 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _Context = require("../Context");
 
-var _hary = _interopRequireDefault(require("../img/hary.jpg"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function FeedItem() {
-  var context = (0, _react.useContext)(_Context.Context);
-
   var _useContext = (0, _react.useContext)(_Context.Context),
+      posts = _useContext.posts,
       likes = _useContext.likes;
 
-  return /*#__PURE__*/_react.default.createElement("div", null, context.posts.map(function (post) {
+  var Hary = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpRVk4ezrG1w_tYe3iURo8AiI1YhfqQmIW_g&usqp=CAU";
+  return /*#__PURE__*/_react.default.createElement("div", null, posts.map(function (post) {
     return /*#__PURE__*/_react.default.createElement("article", {
       key: post.id,
       className: "post"
@@ -34082,7 +34114,7 @@ function FeedItem() {
       className: "heading"
     }, /*#__PURE__*/_react.default.createElement("img", {
       className: "profile_image",
-      src: _hary.default,
+      src: Hary,
       alt: "Profile"
     }), /*#__PURE__*/_react.default.createElement("h3", {
       className: "header"
@@ -34116,8 +34148,10 @@ function FeedItem() {
       }, comment.comment)));
     })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("input", {
       type: "text",
+      name: "comment",
       className: "add_comment",
-      placeholder: "Add a comment..."
+      placeholder: "Add a comment...",
+      required: true
     }), /*#__PURE__*/_react.default.createElement("input", {
       type: "submit",
       className: "submit_comment",
@@ -34125,7 +34159,7 @@ function FeedItem() {
     }))));
   }));
 }
-},{"react":"node_modules/react/index.js","../Context":"Context.js","../img/hary.jpg":"img/hary.jpg"}],"pages/Add.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../Context":"Context.js"}],"pages/Add.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34141,8 +34175,16 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function Add() {
+  var _React$createElement;
+
   var _useContext = (0, _react.useContext)(_Context.Context),
+      newPosts = _useContext.newPosts,
+      handleChange = _useContext.handleChange,
+      newUrl = _useContext.newUrl,
+      handleInput = _useContext.handleInput,
       addNewPost = _useContext.addNewPost;
 
   return /*#__PURE__*/_react.default.createElement("form", {
@@ -34152,18 +34194,23 @@ function Add() {
     className: "textarea"
   }, /*#__PURE__*/_react.default.createElement("label", null, "New post: "), /*#__PURE__*/_react.default.createElement("textarea", {
     id: "legend",
+    value: newPosts,
+    onChange: handleChange,
     className: "statu",
     name: "legend",
     rows: "6",
-    placeholder: "Say what's on your mind..."
+    placeholder: "Say what's on your mind...",
+    required: true
   })), /*#__PURE__*/_react.default.createElement("fieldset", {
     className: "input_profile"
-  }, /*#__PURE__*/_react.default.createElement("label", null, "Picture url: "), /*#__PURE__*/_react.default.createElement("input", {
+  }, /*#__PURE__*/_react.default.createElement("label", null, "Picture url: "), /*#__PURE__*/_react.default.createElement("input", (_React$createElement = {
     id: "image",
+    type: "text",
+    value: newUrl,
+    onChange: handleInput,
     className: "image_url",
-    name: "image",
-    type: "url"
-  }))), /*#__PURE__*/_react.default.createElement("button", {
+    name: "image"
+  }, _defineProperty(_React$createElement, "type", "url"), _defineProperty(_React$createElement, "required", true), _React$createElement)))), /*#__PURE__*/_react.default.createElement("button", {
     className: "submitBttn",
     type: "submit"
   }, "Post"));
