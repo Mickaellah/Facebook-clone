@@ -33944,6 +33944,12 @@ function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.it
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -33986,6 +33992,11 @@ function ContextProvider(props) {
       newUrl = _useState10[0],
       setNewUrl = _useState10[1];
 
+  var _useState11 = (0, _react.useState)(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      newComments = _useState12[0],
+      setNewComments = _useState12[1];
+
   (0, _react.useEffect)(function () {
     setPosts(_PostData.default);
   }, [posts]);
@@ -34004,21 +34015,27 @@ function ContextProvider(props) {
   }
 
   function addNewComment(e, id) {
+    console.log();
     e.preventDefault();
     var comment = e.target.comment;
     var newComment = {
-      id: Date.now(),
-      profile: "",
-      userName: "",
-      comment: comment.value,
-      date: ""
+      "id": Date.now(),
+      "userId": Date.now(),
+      "comment": comment.value,
+      "date": new Date(Date.now()).toDateString()
     };
+    console.log(newComment);
     posts.map(function (post) {
-      if (post.id === id) {
-        post.comment.push(newComment);
-        setPosts(_toConsumableArray(post));
+      if (post.id == id) {
+        return _objectSpread(_objectSpread({}, post), {}, {
+          comments: post.comments.push(newComment)
+        });
       }
+
+      return post;
     });
+    setPosts(_toConsumableArray(posts));
+    e.target.reset();
   }
 
   function addNewPost(e) {
@@ -34054,6 +34071,10 @@ function ContextProvider(props) {
     setNewUrl(e.target.value);
   }
 
+  function handleNewComments(e) {
+    setNewComments(e.target.value);
+  }
+
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
       posts: posts,
@@ -34063,7 +34084,10 @@ function ContextProvider(props) {
       handleChange: handleChange,
       newUrl: newUrl,
       handleInput: handleInput,
-      addNewPost: addNewPost
+      addNewPost: addNewPost,
+      newComments: newComments,
+      addNewComment: addNewComment,
+      handleNewComments: handleNewComments
     }
   }, props.children);
 }
@@ -34133,7 +34157,10 @@ function FeedItem() {
   var _useContext = (0, _react.useContext)(_Context.Context),
       posts = _useContext.posts,
       likes = _useContext.likes,
-      user = _useContext.user;
+      user = _useContext.user,
+      newComments = _useContext.newComments,
+      addNewComment = _useContext.addNewComment,
+      handleNewComments = _useContext.handleNewComments;
 
   return /*#__PURE__*/_react.default.createElement("div", null, posts.map(function (post) {
     return /*#__PURE__*/_react.default.createElement("article", {
@@ -34187,8 +34214,14 @@ function FeedItem() {
       }, /*#__PURE__*/_react.default.createElement("p", null, comment.comment), /*#__PURE__*/_react.default.createElement("span", {
         className: "dateOfComment"
       }, comment.date));
-    })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("input", {
+    })), /*#__PURE__*/_react.default.createElement("form", {
+      onSubmit: function onSubmit(e) {
+        return addNewComment(e, post.id);
+      }
+    }, /*#__PURE__*/_react.default.createElement("input", {
       type: "text",
+      value: newComments,
+      onChange: handleNewComments,
       name: "comment",
       className: "add_comment",
       placeholder: "Add a comment...",

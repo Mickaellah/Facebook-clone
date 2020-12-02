@@ -10,6 +10,7 @@ function ContextProvider(props) {
     const [like, setLike] = useState(0);
     const [newPosts, setNewPosts] = useState('');
     const [newUrl, setNewUrl] = useState('');
+    const [newComments, setNewComments] = useState('');
 
     useEffect(() => {
         setPosts(PostData);
@@ -29,23 +30,30 @@ function ContextProvider(props) {
     }
 
     function addNewComment(e, id) {
+        console.log()
         e.preventDefault();
         const {comment} = e.target;
 
         const newComment = {
-            id: Date.now(),
-            profile: "",
-            userName: "",
-            comment: comment.value,
-            date: ""
+            "id": Date.now(),
+            "userId": Date.now(),
+            "comment": comment.value,
+            "date": new Date(Date.now()).toDateString()
         }
 
+        console.log(newComment);
+
         posts.map(post => {
-            if (post.id === id) {
-                post.comment.push(newComment);
-                setPosts([...post]);
+            if (post.id == id) {
+                return {
+                    ...post,
+                    comments: post.comments.push(newComment)
+                }
             }
+            return post;
         })
+        setPosts([...posts]);
+        e.target.reset();
     }
 
     function addNewPost(e) {
@@ -88,8 +96,12 @@ function ContextProvider(props) {
         setNewUrl(e.target.value);
     }
 
+    function handleNewComments(e) {
+        setNewComments(e.target.value);
+    }
+
     return (
-        <Context.Provider value={{posts, user, likes, newPosts, handleChange, newUrl, handleInput, addNewPost}}>
+        <Context.Provider value={{posts, user, likes, newPosts, handleChange, newUrl, handleInput, addNewPost, newComments, addNewComment, handleNewComments}}>
             {props.children}
         </Context.Provider>
     )

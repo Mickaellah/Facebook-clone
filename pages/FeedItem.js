@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {Context} from '../Context';
 
 export default function FeedItem() {
-    const {posts, likes, user} = useContext(Context);
+    const {posts, likes, user, newComments, addNewComment, handleNewComments} = useContext(Context);
     return (
         <div>
             {
@@ -47,10 +47,10 @@ export default function FeedItem() {
                                         </div>
                                     )}
                                 </div>
-                                <div>
-                                    <input type="text" name="comment" className="add_comment" placeholder="Add a comment..." required />
+                                <form onSubmit={(e) => addNewComment(e, post.id)}>
+                                    <input type="text" value={newComments} onChange={handleNewComments} name="comment" className="add_comment" placeholder="Add a comment..." required />
                                     <input type="submit" className="submit_comment" placeholder="Post" />
-                                </div>
+                                </form>
                             </div>
                         </article>
                     )
