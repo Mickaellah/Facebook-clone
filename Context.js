@@ -11,6 +11,8 @@ function ContextProvider(props) {
     const [newPosts, setNewPosts] = useState('');
     const [newUrl, setNewUrl] = useState('');
     const [newComments, setNewComments] = useState('');
+    const [newName, setNewName] = useState('');
+    const [newProfile, setNewProfile] = useState('');
 
     useEffect(() => {
         setPosts(PostData);
@@ -46,7 +48,7 @@ function ContextProvider(props) {
 
         const newComment = {
             "id": Date.now(),
-            "userId": Date.now(),
+            "userId": 1606827064330,
             "comment": comment.value,
             "date": new Date(Date.now()).toDateString()
         }
@@ -77,7 +79,7 @@ function ContextProvider(props) {
             "image": newUrl,
             "likes": [
                 {
-                    "userId": Date.now(),
+                    "userId": 1606827064330,
                     "likedId": Date.now(),
                     "like": 0
                 }
@@ -85,7 +87,7 @@ function ContextProvider(props) {
             "comments": [
                 {
                     "id": Date.now(),
-                    "userId": Date.now(),
+                    "userId": 1606827064330,
                     "comment": "",
                     "date": new Date(Date.now()).toDateString()
                 }
@@ -96,6 +98,31 @@ function ContextProvider(props) {
 
         setPosts([...posts]);
         e.target.reset();
+    }
+
+    function updateUserName(e, id) {
+        e.preventDefault();
+        const {userName, imageUrl} = e.target;
+
+        const newUser = {
+            "userId": 1606827064330,
+            "userName": userName.value,
+            "userProfilePhoto": imageUrl.value
+        }
+
+        posts.map(post => {
+            if (post.userId = id) {
+                return {
+                    ...post,
+                    userName: post.userName.push(newUser)
+                }
+            }
+            return post;
+        })
+
+        setPosts([...posts]);
+
+        console.log(newUser);
     }
 
     function handleChange(e) {
@@ -110,8 +137,16 @@ function ContextProvider(props) {
         setNewComments(e.target.value);
     }
 
+    function typeNewName(e) {
+        setNewName(e.target.value);
+    }
+
+    function typeNewUrlImage(e) {
+        setNewProfile(e.target.value);
+    }
+
     return (
-        <Context.Provider value={{posts, user, updateLike, newPosts, handleChange, newUrl, handleInput, addNewPost, newComments, addNewComment, handleNewComments}}>
+        <Context.Provider value={{posts, user, updateLike, newPosts, handleChange, newUrl, handleInput, addNewPost, newComments, addNewComment, handleNewComments, newName, newProfile, typeNewName, typeNewUrlImage, updateUserName}}>
             {props.children}
         </Context.Provider>
     )

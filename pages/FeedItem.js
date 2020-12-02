@@ -12,7 +12,7 @@ export default function FeedItem() {
                             <div className="heading">
                                 {user.map((user) => 
                                     <div key={user.userId} className="user">
-                                        <img className="profile_image" src={user.userProfilePhoto} alt="Profile" />
+                                        <img className="profile_image" id={user.userId} src={user.userProfilePhoto} alt="Profile" />
                                         <h3 className="header">{user.userName}</h3>
                                     </div>
                                 )}
@@ -34,7 +34,7 @@ export default function FeedItem() {
                                 <div className="comments_container">
                                     {user.map((user) => 
                                         <div className="friends" key={user.userId}>
-                                            <img className="profile_image" src={user.userProfilePhoto} alt="profile picture" />
+                                            <img className="profile_image" id={user.userId} src={user.userProfilePhoto} alt="profile picture" />
                                             <h4 className="user_name">{user.userName}</h4>
                                         </div>
                                     )}

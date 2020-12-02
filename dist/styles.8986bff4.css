@@ -36,6 +36,9 @@ button {
 
 .link:hover {
     font-weight: bold;
+    color: rebeccapurple;
+    text-decoration: none;
+    font-size: 18px;
 }
 
 .post {
@@ -161,10 +164,15 @@ input[type="submit"] {
     flex-direction: column;
 }
 
-.input_profile {
+.input_profile,
+.input_user_name {
     display: flex;
     justify-content: space-between;
     border: none;
+}
+
+.userName {
+    margin-block-start: 16px;
 }
 
 .input_profile > label {

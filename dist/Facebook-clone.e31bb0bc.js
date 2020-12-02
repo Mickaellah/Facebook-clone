@@ -33856,7 +33856,7 @@ if ("development" !== "production") {
 },{"react-router":"node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"node_modules/react/index.js","history":"node_modules/history/esm/history.js","prop-types":"node_modules/prop-types/index.js","tiny-warning":"node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"PostData.json":[function(require,module,exports) {
 module.exports = [{
   "id": 1606718446833,
-  "userId": 1606825547642,
+  "userId": 1606827064330,
   "userName": "Clopedia Nomenjanahary",
   "date": "30/11/2020",
   "legend": "Cool day 💥⛅⛅",
@@ -33874,7 +33874,7 @@ module.exports = [{
   }]
 }, {
   "id": 1606718473274,
-  "userId": 1606825547642,
+  "userId": 1606827064330,
   "userName": "Clopedia Nomenjanahary",
   "date": "29/11/2020",
   "legend": "Jejus is my saviour 🙏🙏",
@@ -33892,7 +33892,7 @@ module.exports = [{
   }]
 }, {
   "id": 1606718492294,
-  "userId": 1606825547642,
+  "userId": 1606827064330,
   "userName": "Clopedia Nomenjanahary",
   "date": "05/11/2020",
   "legend": "Not perfect 😂🤣",
@@ -33997,6 +33997,16 @@ function ContextProvider(props) {
       newComments = _useState12[0],
       setNewComments = _useState12[1];
 
+  var _useState13 = (0, _react.useState)(''),
+      _useState14 = _slicedToArray(_useState13, 2),
+      newName = _useState14[0],
+      setNewName = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(''),
+      _useState16 = _slicedToArray(_useState15, 2),
+      newProfile = _useState16[0],
+      setNewProfile = _useState16[1];
+
   (0, _react.useEffect)(function () {
     setPosts(_PostData.default);
   }, [posts]);
@@ -34028,7 +34038,7 @@ function ContextProvider(props) {
     var comment = e.target.comment;
     var newComment = {
       "id": Date.now(),
-      "userId": Date.now(),
+      "userId": 1606827064330,
       "comment": comment.value,
       "date": new Date(Date.now()).toDateString()
     };
@@ -34055,13 +34065,13 @@ function ContextProvider(props) {
       "legend": newPosts,
       "image": newUrl,
       "likes": [{
-        "userId": Date.now(),
+        "userId": 1606827064330,
         "likedId": Date.now(),
         "like": 0
       }],
       "comments": [{
         "id": Date.now(),
-        "userId": Date.now(),
+        "userId": 1606827064330,
         "comment": "",
         "date": new Date(Date.now()).toDateString()
       }]
@@ -34069,6 +34079,29 @@ function ContextProvider(props) {
     posts.push(newPost);
     setPosts(_toConsumableArray(posts));
     e.target.reset();
+  }
+
+  function updateUserName(e, id) {
+    e.preventDefault();
+    var _e$target = e.target,
+        userName = _e$target.userName,
+        imageUrl = _e$target.imageUrl;
+    var newUser = {
+      "userId": 1606827064330,
+      "userName": userName.value,
+      "userProfilePhoto": imageUrl.value
+    };
+    posts.map(function (post) {
+      if (post.userId = id) {
+        return _objectSpread(_objectSpread({}, post), {}, {
+          userName: post.userName.push(newUser)
+        });
+      }
+
+      return post;
+    });
+    setPosts(_toConsumableArray(posts));
+    console.log(newUser);
   }
 
   function handleChange(e) {
@@ -34083,6 +34116,14 @@ function ContextProvider(props) {
     setNewComments(e.target.value);
   }
 
+  function typeNewName(e) {
+    setNewName(e.target.value);
+  }
+
+  function typeNewUrlImage(e) {
+    setNewProfile(e.target.value);
+  }
+
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
       posts: posts,
@@ -34095,7 +34136,12 @@ function ContextProvider(props) {
       addNewPost: addNewPost,
       newComments: newComments,
       addNewComment: addNewComment,
-      handleNewComments: handleNewComments
+      handleNewComments: handleNewComments,
+      newName: newName,
+      newProfile: newProfile,
+      typeNewName: typeNewName,
+      typeNewUrlImage: typeNewUrlImage,
+      updateUserName: updateUserName
     }
   }, props.children);
 }
@@ -34182,6 +34228,7 @@ function FeedItem() {
         className: "user"
       }, /*#__PURE__*/_react.default.createElement("img", {
         className: "profile_image",
+        id: user.userId,
         src: user.userProfilePhoto,
         alt: "Profile"
       }), /*#__PURE__*/_react.default.createElement("h3", {
@@ -34212,6 +34259,7 @@ function FeedItem() {
         key: user.userId
       }, /*#__PURE__*/_react.default.createElement("img", {
         className: "profile_image",
+        id: user.userId,
         src: user.userProfilePhoto,
         alt: "profile picture"
       }), /*#__PURE__*/_react.default.createElement("h4", {
@@ -34307,14 +34355,49 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Option;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Context = require("../Context");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function Option() {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Option"));
+  var _useContext = (0, _react.useContext)(_Context.Context),
+      newName = _useContext.newName,
+      newProfile = _useContext.newProfile,
+      typeNewName = _useContext.typeNewName,
+      typeNewUrlImage = _useContext.typeNewUrlImage,
+      updateUserName = _useContext.updateUserName;
+
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Options: "), /*#__PURE__*/_react.default.createElement("form", {
+    onSubmit: updateUserName
+  }, /*#__PURE__*/_react.default.createElement("fieldset", {
+    className: "input_user_name"
+  }, /*#__PURE__*/_react.default.createElement("label", {
+    className: "userName"
+  }, "UserName: "), /*#__PURE__*/_react.default.createElement("input", {
+    value: newName,
+    onChange: typeNewName,
+    type: "text",
+    name: "userName",
+    placeholder: "Type your username here"
+  })), /*#__PURE__*/_react.default.createElement("fieldset", {
+    className: "input_profile"
+  }, /*#__PURE__*/_react.default.createElement("label", null, "Profile picture: "), /*#__PURE__*/_react.default.createElement("input", {
+    value: newProfile,
+    onChange: typeNewUrlImage,
+    className: "image_url",
+    name: "imageUrl",
+    type: "url",
+    placeholder: "Paste a URL here"
+  })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", {
+    className: "submitBttn",
+    type: "submit"
+  }, "Save"))));
 }
-},{"react":"node_modules/react/index.js"}],"components/Feed.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../Context":"Context.js"}],"components/Feed.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
