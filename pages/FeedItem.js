@@ -2,8 +2,7 @@ import React, {useContext} from 'react';
 import {Context} from '../Context';
 
 export default function FeedItem() {
-    const {posts, likes} = useContext(Context);
-    const Hary = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpRVk4ezrG1w_tYe3iURo8AiI1YhfqQmIW_g&usqp=CAU";
+    const {posts, likes, user} = useContext(Context);
     return (
         <div>
             {
@@ -11,8 +10,12 @@ export default function FeedItem() {
                     return (
                         <article key={post.id} className="post">
                             <div className="heading">
-                                <img className="profile_image" src={Hary} alt="Profile" />
-                                <h3 className="header">{post.userName}</h3>
+                                {user.map((user) => 
+                                    <div key={user.userId} className="user">
+                                        <img className="profile_image" src={user.userProfilePhoto} alt="Profile" />
+                                        <h3 className="header">{user.userName}</h3>
+                                    </div>
+                                )}
                                 <p>{post.date}</p>
                             </div>
                             <div>
@@ -22,25 +25,25 @@ export default function FeedItem() {
                                     <button type="button" onClick={likes} id={post.id} className="likebtn">Likes</button>
                                     {
                                         post.likes.map(like => {
-                                            return (
-                                                <span key={like.likedId} className="likes_number">{post.count}</span>
+                                            return ( 
+                                                <span key={like.likedId} className="likes_number">{like.like}</span>
                                             )
                                         })
-                                    }
+                                        }
                                 </div>
                                 <div className="comments_container">
+                                    {user.map((user) => 
+                                        <div className="friends" key={user.userId}>
+                                            <img className="profile_image" src={user.userProfilePhoto} alt="profile picture" />
+                                            <h4 className="user_name">{user.userName}</h4>
+                                        </div>
+                                    )}
+                                </div>
+                                <div>
                                     {post.comments.map((comment) => 
-                                        <div key={comment.id}>
-                                            <div className="friends">
-                                                <img className="profile_picture" src={comment.profile} alt="profile picture" />
-                                                <h4>{comment.userName}</h4>
-                                                <span className="date">{comment.date}</span>
-                                            </div>
-                                                <div>
-                                                    <p className="comments">
-                                                        {comment.comment}
-                                                    </p>
-                                                </div>
+                                        <div className="friends"  key={comment.id}>
+                                            <p>{comment.comment}</p>
+                                            <span className="dateOfComment">{comment.date}</span>
                                         </div>
                                     )}
                                 </div>

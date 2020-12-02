@@ -33853,37 +33853,7 @@ if ("development" !== "production") {
     style: _propTypes.default.object
   });
 }
-},{"react-router":"node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"node_modules/react/index.js","history":"node_modules/history/esm/history.js","prop-types":"node_modules/prop-types/index.js","tiny-warning":"node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"components/Header.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = Header;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _reactRouterDom = require("react-router-dom");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function Header() {
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "main_heading"
-  }, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h1", null, "OnjaBook")), /*#__PURE__*/_react.default.createElement("nav", null, /*#__PURE__*/_react.default.createElement("ul", {
-    className: "navigation"
-  }, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/",
-    className: "link"
-  }, "Feed")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/add",
-    className: "link"
-  }, "Add post")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/option",
-    className: "link"
-  }, "Option")))));
-}
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"PostData.json":[function(require,module,exports) {
+},{"react-router":"node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"node_modules/react/index.js","history":"node_modules/history/esm/history.js","prop-types":"node_modules/prop-types/index.js","tiny-warning":"node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"PostData.json":[function(require,module,exports) {
 module.exports = [{
   "id": 1606718446833,
   "userId": 1606825547642,
@@ -33894,22 +33864,13 @@ module.exports = [{
   "likes": [{
     "userId": 1606827064330,
     "likedId": 1,
-    "count": 0
-  }, {
-    "userId": 1606827108409,
-    "likedId": 2,
-    "count": 0
+    "like": 0
   }],
   "comments": [{
     "id": 1606801488981,
     "userId": 1606827064330,
     "comment": "Nice pic!!!",
     "date": "30/11/2020"
-  }, {
-    "id": 1606801503504,
-    "userId": 1606827108409,
-    "comment": "Jolie",
-    "date": "01/12/2020"
   }]
 }, {
   "id": 1606718473274,
@@ -33921,22 +33882,13 @@ module.exports = [{
   "likes": [{
     "userId": 1606827064330,
     "likedId": 3,
-    "count": 0
-  }, {
-    "userId": 1606827108409,
-    "likedId": 4,
-    "count": 0
+    "like": 0
   }],
   "comments": [{
     "id": 1606801523412,
     "userId": 1606827064330,
     "comment": "Cool 😘",
     "date": "29/11/2020"
-  }, {
-    "id": 1606801536655,
-    "userId": 1606827108409,
-    "comment": "Our saviour 🙏",
-    "date": "30/11/2020"
   }]
 }, {
   "id": 1606718492294,
@@ -33948,23 +33900,20 @@ module.exports = [{
   "likes": [{
     "userId": 1606827064330,
     "likedId": 5,
-    "count": 0
-  }, {
-    "userId": 1606827108409,
-    "likedId": 6,
-    "count": 0
+    "like": 0
   }],
   "comments": [{
     "id": 1606801547948,
     "userId": 1606827064330,
     "comment": "Love it ❤❤",
     "date": "15/11/2020"
-  }, {
-    "id": 1606801572601,
-    "userId": 1606827108409,
-    "comment": "Top 😍😍",
-    "date": "17/11/2020"
   }]
+}];
+},{}],"userData.json":[function(require,module,exports) {
+module.exports = [{
+  "userId": 1606827064330,
+  "userName": "Clopedia Nomenjanahary",
+  "userProfilePhoto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTagsUnpn2eGgUbTay4AxZcbHQT6TWneoMplw&usqp=CAU"
 }];
 },{}],"Context.js":[function(require,module,exports) {
 "use strict";
@@ -33978,6 +33927,8 @@ exports.Context = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 var _PostData = _interopRequireDefault(require("./PostData.json"));
+
+var _userData = _interopRequireDefault(require("./userData.json"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34015,31 +33966,39 @@ function ContextProvider(props) {
       posts = _useState2[0],
       setPosts = _useState2[1];
 
-  var _useState3 = (0, _react.useState)(0),
+  var _useState3 = (0, _react.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      like = _useState4[0],
-      setLike = _useState4[1];
+      user = _useState4[0],
+      setUser = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(''),
+  var _useState5 = (0, _react.useState)(0),
       _useState6 = _slicedToArray(_useState5, 2),
-      newPosts = _useState6[0],
-      setNewPosts = _useState6[1];
+      like = _useState6[0],
+      setLike = _useState6[1];
 
   var _useState7 = (0, _react.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      newUrl = _useState8[0],
-      setNewUrl = _useState8[1];
+      newPosts = _useState8[0],
+      setNewPosts = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      newUrl = _useState10[0],
+      setNewUrl = _useState10[1];
 
   (0, _react.useEffect)(function () {
     setPosts(_PostData.default);
   }, [posts]);
+  (0, _react.useEffect)(function () {
+    setUser(_userData.default);
+  }, [user]);
 
   function likes(e) {
     var id = e.target.id;
     var findId = posts.find(function (post) {
       return post.id == id;
     });
-    var favorite = findId.likes.count++;
+    var favorite = findId.likes;
     console.log(favorite);
     setLike(favorite);
   }
@@ -34070,13 +34029,16 @@ function ContextProvider(props) {
       "date": new Date(Date.now()).toDateString(),
       "legend": newPosts,
       "image": newUrl,
-      "likes": 0,
-      "comment": [{
+      "likes": [{
+        "userId": Date.now(),
+        "likedId": Date.now(),
+        "like": 0
+      }],
+      "comments": [{
         "id": Date.now(),
-        "profile": "",
-        "userName": "",
+        "userId": Date.now(),
         "comment": "",
-        "date": ""
+        "date": new Date(Date.now()).toDateString()
       }]
     };
     posts.push(newPost);
@@ -34095,6 +34057,7 @@ function ContextProvider(props) {
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
       posts: posts,
+      user: user,
       likes: likes,
       newPosts: newPosts,
       handleChange: handleChange,
@@ -34104,7 +34067,53 @@ function ContextProvider(props) {
     }
   }, props.children);
 }
-},{"react":"node_modules/react/index.js","./PostData.json":"PostData.json"}],"pages/FeedItem.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./PostData.json":"PostData.json","./userData.json":"userData.json"}],"components/Header.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Header;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactRouterDom = require("react-router-dom");
+
+var _Context = require("../Context");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function Header() {
+  var _useContext = (0, _react.useContext)(_Context.Context),
+      user = _useContext.user;
+
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "main_heading"
+  }, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h1", null, "OnjaBook")), /*#__PURE__*/_react.default.createElement("nav", null, /*#__PURE__*/_react.default.createElement("ul", {
+    className: "navigation"
+  }, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/",
+    className: "link"
+  }, "Feed")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/add",
+    className: "link"
+  }, "Add post")), /*#__PURE__*/_react.default.createElement("li", null, user.map(function (user) {
+    return /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+      to: "/option",
+      key: user.userId,
+      className: "link link_user"
+    }, /*#__PURE__*/_react.default.createElement("p", {
+      className: "user_name"
+    }, user.userName), /*#__PURE__*/_react.default.createElement("img", {
+      className: "user_profile",
+      src: user.userProfilePhoto,
+      alt: "User profile"
+    }));
+  })))));
+}
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../Context":"Context.js"}],"pages/FeedItem.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34123,22 +34132,27 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function FeedItem() {
   var _useContext = (0, _react.useContext)(_Context.Context),
       posts = _useContext.posts,
-      likes = _useContext.likes;
+      likes = _useContext.likes,
+      user = _useContext.user;
 
-  var Hary = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpRVk4ezrG1w_tYe3iURo8AiI1YhfqQmIW_g&usqp=CAU";
   return /*#__PURE__*/_react.default.createElement("div", null, posts.map(function (post) {
     return /*#__PURE__*/_react.default.createElement("article", {
       key: post.id,
       className: "post"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "heading"
-    }, /*#__PURE__*/_react.default.createElement("img", {
-      className: "profile_image",
-      src: Hary,
-      alt: "Profile"
-    }), /*#__PURE__*/_react.default.createElement("h3", {
-      className: "header"
-    }, post.userName), /*#__PURE__*/_react.default.createElement("p", null, post.date)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, post.legend), /*#__PURE__*/_react.default.createElement("img", {
+    }, user.map(function (user) {
+      return /*#__PURE__*/_react.default.createElement("div", {
+        key: user.userId,
+        className: "user"
+      }, /*#__PURE__*/_react.default.createElement("img", {
+        className: "profile_image",
+        src: user.userProfilePhoto,
+        alt: "Profile"
+      }), /*#__PURE__*/_react.default.createElement("h3", {
+        className: "header"
+      }, user.userName));
+    }), /*#__PURE__*/_react.default.createElement("p", null, post.date)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, post.legend), /*#__PURE__*/_react.default.createElement("img", {
       src: "".concat(post.image),
       alt: "Post"
     }), /*#__PURE__*/_react.default.createElement("div", {
@@ -34152,23 +34166,27 @@ function FeedItem() {
       return /*#__PURE__*/_react.default.createElement("span", {
         key: like.likedId,
         className: "likes_number"
-      }, post.count);
+      }, like.like);
     })), /*#__PURE__*/_react.default.createElement("div", {
       className: "comments_container"
-    }, post.comments.map(function (comment) {
+    }, user.map(function (user) {
       return /*#__PURE__*/_react.default.createElement("div", {
-        key: comment.id
-      }, /*#__PURE__*/_react.default.createElement("div", {
-        className: "friends"
+        className: "friends",
+        key: user.userId
       }, /*#__PURE__*/_react.default.createElement("img", {
-        className: "profile_picture",
-        src: comment.profile,
+        className: "profile_image",
+        src: user.userProfilePhoto,
         alt: "profile picture"
-      }), /*#__PURE__*/_react.default.createElement("h4", null, comment.userName), /*#__PURE__*/_react.default.createElement("span", {
-        className: "date"
-      }, comment.date)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", {
-        className: "comments"
-      }, comment.comment)));
+      }), /*#__PURE__*/_react.default.createElement("h4", {
+        className: "user_name"
+      }, user.userName));
+    })), /*#__PURE__*/_react.default.createElement("div", null, post.comments.map(function (comment) {
+      return /*#__PURE__*/_react.default.createElement("div", {
+        className: "friends",
+        key: comment.id
+      }, /*#__PURE__*/_react.default.createElement("p", null, comment.comment), /*#__PURE__*/_react.default.createElement("span", {
+        className: "dateOfComment"
+      }, comment.date));
     })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("input", {
       type: "text",
       name: "comment",
@@ -34345,7 +34363,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55214" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61406" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {Link} from 'react-router-dom';
+import {Context} from '../Context';
 
 export default function Header() {
+    const {user} = useContext(Context);
     return (
         <div className="main_heading">
             <header>
@@ -22,9 +24,16 @@ export default function Header() {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/option" className="link">
-                            Option
-                        </Link>
+                        {
+                            user.map((user) => {
+                                return (
+                                    <Link to="/option" key={user.userId} className="link link_user">
+                                        <p className="user_name">{user.userName}</p>
+                                        <img className="user_profile" src={user.userProfilePhoto} alt="User profile" />
+                                    </Link>
+                                )
+                            })
+                        }
                     </li>
                 </ul>
             </nav>

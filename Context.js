@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import PostData from './PostData.json';
+import UserData from './userData.json';
 
 const Context = React.createContext();
 
 function ContextProvider(props) {
     const [posts, setPosts] = useState([]);
+    const [user, setUser] = useState([]);
     const [like, setLike] = useState(0);
     const [newPosts, setNewPosts] = useState('');
     const [newUrl, setNewUrl] = useState('');
@@ -13,10 +15,15 @@ function ContextProvider(props) {
         setPosts(PostData);
     }, [posts]);
 
+    useEffect(() => {
+        setUser(UserData);
+    }, [user]);
+
     function likes(e) {
         const id = e.target.id;
         const findId = posts.find(post => post.id == id);
-        const favorite = findId.likes.count++;
+        const favorite = findId.likes;
+
         console.log(favorite);
         setLike(favorite);
     }
@@ -50,14 +57,19 @@ function ContextProvider(props) {
             "date": new Date(Date.now()).toDateString(),
             "legend": newPosts,
             "image": newUrl,
-            "likes": 0,
-            "comment": [
+            "likes": [
+                {
+                    "userId": Date.now(),
+                    "likedId": Date.now(),
+                    "like": 0
+                }
+            ],
+            "comments": [
                 {
                     "id": Date.now(),
-                    "profile": "",
-                    "userName": "",
+                    "userId": Date.now(),
                     "comment": "",
-                    "date": ""
+                    "date": new Date(Date.now()).toDateString()
                 }
             ]
         }
@@ -77,7 +89,7 @@ function ContextProvider(props) {
     }
 
     return (
-        <Context.Provider value={{posts, likes, newPosts, handleChange, newUrl, handleInput, addNewPost}}>
+        <Context.Provider value={{posts, user, likes, newPosts, handleChange, newUrl, handleInput, addNewPost}}>
             {props.children}
         </Context.Provider>
     )
