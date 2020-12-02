@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {Context} from '../Context';
 
 export default function FeedItem() {
-    const {posts, likes, user, newComments, addNewComment, handleNewComments} = useContext(Context);
+    const {posts, updateLike, user, newComments, addNewComment, handleNewComments} = useContext(Context);
     return (
         <div>
             {
@@ -22,7 +22,7 @@ export default function FeedItem() {
                                 <p>{post.legend}</p>
                                 <img src={`${post.image}`} alt="Post" />
                                 <div className="likes">
-                                    <button type="button" onClick={likes} id={post.id} className="likebtn">Likes</button>
+                                    <button type="button" onClick={(e) => updateLike(e, post.id)} id={post.id} className="likebtn">Likes</button>
                                     {
                                         post.likes.map(like => {
                                             return ( 

@@ -20,13 +20,23 @@ function ContextProvider(props) {
         setUser(UserData);
     }, [user]);
 
-    function likes(e) {
-        const id = e.target.id;
-        const findId = posts.find(post => post.id == id);
-        const favorite = findId.likes;
+    function updateLike(id) {
+        // const id = e.target.id;
+        // const findId = posts.find(post => post.id == id);
+        // const favorite = findId.likes;
+        console.log(id);
+        posts.map(post => {
+            if (post.id == id) {
+                return {
+                    ...post,
+                    likes: post.likes + 1
+                }
+            }
+            return post
+        })
+        console.log(likes);
+        setLike([...posts]);
 
-        console.log(favorite);
-        setLike(favorite);
     }
 
     function addNewComment(e, id) {
@@ -101,7 +111,7 @@ function ContextProvider(props) {
     }
 
     return (
-        <Context.Provider value={{posts, user, likes, newPosts, handleChange, newUrl, handleInput, addNewPost, newComments, addNewComment, handleNewComments}}>
+        <Context.Provider value={{posts, user, updateLike, newPosts, handleChange, newUrl, handleInput, addNewPost, newComments, addNewComment, handleNewComments}}>
             {props.children}
         </Context.Provider>
     )

@@ -34004,14 +34004,22 @@ function ContextProvider(props) {
     setUser(_userData.default);
   }, [user]);
 
-  function likes(e) {
-    var id = e.target.id;
-    var findId = posts.find(function (post) {
-      return post.id == id;
+  function updateLike(id) {
+    // const id = e.target.id;
+    // const findId = posts.find(post => post.id == id);
+    // const favorite = findId.likes;
+    console.log(id);
+    posts.map(function (post) {
+      if (post.id == id) {
+        return _objectSpread(_objectSpread({}, post), {}, {
+          likes: post.likes + 1
+        });
+      }
+
+      return post;
     });
-    var favorite = findId.likes;
-    console.log(favorite);
-    setLike(favorite);
+    console.log(likes);
+    setLike(_toConsumableArray(posts));
   }
 
   function addNewComment(e, id) {
@@ -34079,7 +34087,7 @@ function ContextProvider(props) {
     value: {
       posts: posts,
       user: user,
-      likes: likes,
+      updateLike: updateLike,
       newPosts: newPosts,
       handleChange: handleChange,
       newUrl: newUrl,
@@ -34156,7 +34164,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function FeedItem() {
   var _useContext = (0, _react.useContext)(_Context.Context),
       posts = _useContext.posts,
-      likes = _useContext.likes,
+      updateLike = _useContext.updateLike,
       user = _useContext.user,
       newComments = _useContext.newComments,
       addNewComment = _useContext.addNewComment,
@@ -34186,7 +34194,9 @@ function FeedItem() {
       className: "likes"
     }, /*#__PURE__*/_react.default.createElement("button", {
       type: "button",
-      onClick: likes,
+      onClick: function onClick(e) {
+        return updateLike(e, post.id);
+      },
       id: post.id,
       className: "likebtn"
     }, "Likes"), post.likes.map(function (like) {
