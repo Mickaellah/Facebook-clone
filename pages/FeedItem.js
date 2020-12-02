@@ -2,7 +2,8 @@ import React, {useContext} from 'react';
 import {Context} from '../Context';
 
 export default function FeedItem() {
-    const {posts, updateLike, user, newComments, addNewComment, handleNewComments} = useContext(Context);
+    const {state, dispatch, updateLike, user, addNewComment, handleNewComments} = useContext(Context);
+    const {posts} = state;
     return (
         <div>
             {
@@ -48,7 +49,7 @@ export default function FeedItem() {
                                     )}
                                 </div>
                                 <form onSubmit={(e) => addNewComment(e, post.id)}>
-                                    <input type="text" value={newComments} onChange={handleNewComments} name="comment" className="add_comment" placeholder="Add a comment..." required />
+                                    <input type="text" value={state.newComment} onChange={handleNewComments} name="comment" className="add_comment" placeholder="Add a comment..." required />
                                     <input type="submit" className="submit_comment" placeholder="Post" />
                                 </form>
                             </div>

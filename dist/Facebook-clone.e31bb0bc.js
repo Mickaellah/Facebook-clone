@@ -33936,13 +33936,25 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -33950,74 +33962,88 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 var Context = _react.default.createContext();
 
 exports.Context = Context;
 
+function reducer(state, action) {
+  switch (action.type) {
+    case "POST":
+      {
+        return _objectSpread(_objectSpread({}, state), {}, {
+          posts: action.posts
+        });
+      }
+
+    case "ADD_COMMENT":
+      {
+        var newComments = state.posts.map(function (post) {
+          if (post.id === action.id) {
+            return _objectSpread(_objectSpread({}, post), {}, {
+              comments: [].concat(_toConsumableArray(post.comments), [action.comment])
+            });
+          }
+
+          return post;
+        });
+        return _objectSpread(_objectSpread({}, state), {}, {
+          posts: newComments
+        });
+      }
+  }
+}
+
 function ContextProvider(props) {
+  var _React$useReducer = _react.default.useReducer(reducer, {
+    posts: [],
+    comments: [],
+    comment: ''
+  }),
+      _React$useReducer2 = _slicedToArray(_React$useReducer, 2),
+      state = _React$useReducer2[0],
+      dispatch = _React$useReducer2[1];
+
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      posts = _useState2[0],
-      setPosts = _useState2[1];
+      user = _useState2[0],
+      setUser = _useState2[1];
 
-  var _useState3 = (0, _react.useState)([]),
+  var _useState3 = (0, _react.useState)(0),
       _useState4 = _slicedToArray(_useState3, 2),
-      user = _useState4[0],
-      setUser = _useState4[1];
+      like = _useState4[0],
+      setLike = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(0),
+  var _useState5 = (0, _react.useState)(''),
       _useState6 = _slicedToArray(_useState5, 2),
-      like = _useState6[0],
-      setLike = _useState6[1];
+      newPosts = _useState6[0],
+      setNewPosts = _useState6[1];
 
   var _useState7 = (0, _react.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      newPosts = _useState8[0],
-      setNewPosts = _useState8[1];
+      newUrl = _useState8[0],
+      setNewUrl = _useState8[1];
 
   var _useState9 = (0, _react.useState)(''),
       _useState10 = _slicedToArray(_useState9, 2),
-      newUrl = _useState10[0],
-      setNewUrl = _useState10[1];
+      newName = _useState10[0],
+      setNewName = _useState10[1];
 
   var _useState11 = (0, _react.useState)(''),
       _useState12 = _slicedToArray(_useState11, 2),
-      newComments = _useState12[0],
-      setNewComments = _useState12[1];
-
-  var _useState13 = (0, _react.useState)(''),
-      _useState14 = _slicedToArray(_useState13, 2),
-      newName = _useState14[0],
-      setNewName = _useState14[1];
-
-  var _useState15 = (0, _react.useState)(''),
-      _useState16 = _slicedToArray(_useState15, 2),
-      newProfile = _useState16[0],
-      setNewProfile = _useState16[1];
+      newProfile = _useState12[0],
+      setNewProfile = _useState12[1];
 
   (0, _react.useEffect)(function () {
-    setPosts(_PostData.default);
-  }, [posts]);
+    dispatch({
+      type: "POST",
+      posts: _PostData.default
+    });
+  }, []);
   (0, _react.useEffect)(function () {
     setUser(_userData.default);
   }, [user]);
 
   function updateLike(id) {
-    // const id = e.target.id;
-    // const findId = posts.find(post => post.id == id);
-    // const favorite = findId.likes;
     console.log(id);
     posts.map(function (post) {
       if (post.id == id) {
@@ -34032,9 +34058,12 @@ function ContextProvider(props) {
     setLike(_toConsumableArray(posts));
   }
 
-  function addNewComment(e, id) {
-    console.log();
+  function addNewComment(e) {
     e.preventDefault();
+    dispatch({
+      type: "ADD_COMMENT",
+      comments: comment
+    });
     var comment = e.target.comment;
     var newComment = {
       "id": Date.now(),
@@ -34043,16 +34072,6 @@ function ContextProvider(props) {
       "date": new Date(Date.now()).toDateString()
     };
     console.log(newComment);
-    posts.map(function (post) {
-      if (post.id == id) {
-        return _objectSpread(_objectSpread({}, post), {}, {
-          comments: post.comments.push(newComment)
-        });
-      }
-
-      return post;
-    });
-    setPosts(_toConsumableArray(posts));
     e.target.reset();
   }
 
@@ -34113,7 +34132,11 @@ function ContextProvider(props) {
   }
 
   function handleNewComments(e) {
-    setNewComments(e.target.value);
+    e.preventDefault();
+    dispatch({
+      type: "ADD_COMMENT",
+      comments: e.target.value
+    });
   }
 
   function typeNewName(e) {
@@ -34126,7 +34149,9 @@ function ContextProvider(props) {
 
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
-      posts: posts,
+      state: state,
+      dispatch: dispatch,
+      handleNewComments: handleNewComments,
       user: user,
       updateLike: updateLike,
       newPosts: newPosts,
@@ -34134,9 +34159,7 @@ function ContextProvider(props) {
       newUrl: newUrl,
       handleInput: handleInput,
       addNewPost: addNewPost,
-      newComments: newComments,
       addNewComment: addNewComment,
-      handleNewComments: handleNewComments,
       newName: newName,
       newProfile: newProfile,
       typeNewName: typeNewName,
@@ -34209,13 +34232,14 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function FeedItem() {
   var _useContext = (0, _react.useContext)(_Context.Context),
-      posts = _useContext.posts,
+      state = _useContext.state,
+      dispatch = _useContext.dispatch,
       updateLike = _useContext.updateLike,
       user = _useContext.user,
-      newComments = _useContext.newComments,
       addNewComment = _useContext.addNewComment,
       handleNewComments = _useContext.handleNewComments;
 
+  var posts = state.posts;
   return /*#__PURE__*/_react.default.createElement("div", null, posts.map(function (post) {
     return /*#__PURE__*/_react.default.createElement("article", {
       key: post.id,
@@ -34278,7 +34302,7 @@ function FeedItem() {
       }
     }, /*#__PURE__*/_react.default.createElement("input", {
       type: "text",
-      value: newComments,
+      value: state.newComment,
       onChange: handleNewComments,
       name: "comment",
       className: "add_comment",

@@ -4,28 +4,54 @@ import UserData from './userData.json';
 
 const Context = React.createContext();
 
+function reducer(state, action) {
+    switch (action.type) {
+        case "POST": {
+            return {
+                ...state,
+                posts: action.posts
+            }
+        }
+        case "ADD_COMMENT": {
+            const newComments = state.posts.map(post => {
+                if (post.id === action.id) {
+                    return {
+                        ...post,
+                        comments: [...post.comments, action.comment]
+                    }
+                }
+                return post;
+            })
+            return {
+                ...state,
+                posts: newComments
+            }
+        }
+    }
+}
+
 function ContextProvider(props) {
-    const [posts, setPosts] = useState([]);
+    const [state, dispatch] = React.useReducer(reducer, {
+        posts: [],
+        comments: [],
+        comment: ''
+    });
     const [user, setUser] = useState([]);
     const [like, setLike] = useState(0);
     const [newPosts, setNewPosts] = useState('');
     const [newUrl, setNewUrl] = useState('');
-    const [newComments, setNewComments] = useState('');
     const [newName, setNewName] = useState('');
     const [newProfile, setNewProfile] = useState('');
 
     useEffect(() => {
-        setPosts(PostData);
-    }, [posts]);
+         dispatch({type: "POST", posts: PostData});
+    }, []);
 
     useEffect(() => {
         setUser(UserData);
     }, [user]);
 
     function updateLike(id) {
-        // const id = e.target.id;
-        // const findId = posts.find(post => post.id == id);
-        // const favorite = findId.likes;
         console.log(id);
         posts.map(post => {
             if (post.id == id) {
@@ -41,9 +67,9 @@ function ContextProvider(props) {
 
     }
 
-    function addNewComment(e, id) {
-        console.log()
+    function addNewComment(e) {
         e.preventDefault();
+        dispatch({type: "ADD_COMMENT", comments: comment});
         const {comment} = e.target;
 
         const newComment = {
@@ -54,17 +80,6 @@ function ContextProvider(props) {
         }
 
         console.log(newComment);
-
-        posts.map(post => {
-            if (post.id == id) {
-                return {
-                    ...post,
-                    comments: post.comments.push(newComment)
-                }
-            }
-            return post;
-        })
-        setPosts([...posts]);
         e.target.reset();
     }
 
@@ -134,7 +149,8 @@ function ContextProvider(props) {
     }
 
     function handleNewComments(e) {
-        setNewComments(e.target.value);
+        e.preventDefault();
+        dispatch({type: "ADD_COMMENT", comments: e.target.value})
     }
 
     function typeNewName(e) {
@@ -146,7 +162,7 @@ function ContextProvider(props) {
     }
 
     return (
-        <Context.Provider value={{posts, user, updateLike, newPosts, handleChange, newUrl, handleInput, addNewPost, newComments, addNewComment, handleNewComments, newName, newProfile, typeNewName, typeNewUrlImage, updateUserName}}>
+        <Context.Provider value={{state, dispatch, handleNewComments, user, updateLike, newPosts, handleChange, newUrl, handleInput, addNewPost, addNewComment, newName, newProfile, typeNewName, typeNewUrlImage, updateUserName}}>
             {props.children}
         </Context.Provider>
     )
