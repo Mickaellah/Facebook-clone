@@ -113,7 +113,8 @@ h4 {
 }
 
 .user_name {
-    transform: translate(-60%);
+    transform: translate(-240px);
+    margin-block-start: 16px;
 }
 
 .friends {

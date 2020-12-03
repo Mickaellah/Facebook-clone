@@ -33912,7 +33912,7 @@ module.exports = [{
 },{}],"userData.json":[function(require,module,exports) {
 module.exports = [{
   "userId": 1606827064330,
-  "userName": "Clopedia Nomenjanahary",
+  "userName": "Clopedia",
   "userProfilePhoto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTagsUnpn2eGgUbTay4AxZcbHQT6TWneoMplw&usqp=CAU"
 }];
 },{}],"Context.js":[function(require,module,exports) {
@@ -33971,14 +33971,15 @@ function reducer(state, action) {
     case "POST":
       {
         return _objectSpread(_objectSpread({}, state), {}, {
-          posts: action.posts
+          posts: state.posts = action.posts
         });
       }
 
     case "ADD_COMMENT":
       {
         var newComments = state.posts.map(function (post) {
-          if (post.id === action.id) {
+          if (post.id == action.id) {
+            console.log(action.id);
             return _objectSpread(_objectSpread({}, post), {}, {
               comments: [].concat(_toConsumableArray(post.comments), [action.comment])
             });
@@ -34003,6 +34004,8 @@ function ContextProvider(props) {
       state = _React$useReducer2[0],
       dispatch = _React$useReducer2[1];
 
+  var posts = state.posts;
+
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       user = _useState2[0],
@@ -34015,23 +34018,13 @@ function ContextProvider(props) {
 
   var _useState5 = (0, _react.useState)(''),
       _useState6 = _slicedToArray(_useState5, 2),
-      newPosts = _useState6[0],
-      setNewPosts = _useState6[1];
+      newName = _useState6[0],
+      setNewName = _useState6[1];
 
   var _useState7 = (0, _react.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      newUrl = _useState8[0],
-      setNewUrl = _useState8[1];
-
-  var _useState9 = (0, _react.useState)(''),
-      _useState10 = _slicedToArray(_useState9, 2),
-      newName = _useState10[0],
-      setNewName = _useState10[1];
-
-  var _useState11 = (0, _react.useState)(''),
-      _useState12 = _slicedToArray(_useState11, 2),
-      newProfile = _useState12[0],
-      setNewProfile = _useState12[1];
+      newProfile = _useState8[0],
+      setNewProfile = _useState8[1];
 
   (0, _react.useEffect)(function () {
     dispatch({
@@ -34058,12 +34051,8 @@ function ContextProvider(props) {
     setLike(_toConsumableArray(posts));
   }
 
-  function addNewComment(e) {
+  function addNewComment(e, id) {
     e.preventDefault();
-    dispatch({
-      type: "ADD_COMMENT",
-      comments: comment
-    });
     var comment = e.target.comment;
     var newComment = {
       "id": Date.now(),
@@ -34071,32 +34060,11 @@ function ContextProvider(props) {
       "comment": comment.value,
       "date": new Date(Date.now()).toDateString()
     };
-    console.log(newComment);
-    e.target.reset();
-  }
-
-  function addNewPost(e) {
-    e.preventDefault();
-    var newPost = {
-      "id": Date.now(),
-      "userName": "Clopedia Nomenjanahary",
-      "date": new Date(Date.now()).toDateString(),
-      "legend": newPosts,
-      "image": newUrl,
-      "likes": [{
-        "userId": 1606827064330,
-        "likedId": Date.now(),
-        "like": 0
-      }],
-      "comments": [{
-        "id": Date.now(),
-        "userId": 1606827064330,
-        "comment": "",
-        "date": new Date(Date.now()).toDateString()
-      }]
-    };
-    posts.push(newPost);
-    setPosts(_toConsumableArray(posts));
+    dispatch({
+      type: "ADD_COMMENT",
+      comment: newComment,
+      id: id
+    });
     e.target.reset();
   }
 
@@ -34123,12 +34091,26 @@ function ContextProvider(props) {
     console.log(newUser);
   }
 
-  function handleChange(e) {
-    setNewPosts(e.target.value);
-  }
-
-  function handleInput(e) {
-    setNewUrl(e.target.value);
+  function addNewPost(e) {
+    e.preventDefault();
+    var _e$target2 = e.target,
+        legend = _e$target2.legend,
+        image = _e$target2.image;
+    var newPost = {
+      "id": Date.now(),
+      "userName": "Clopedia",
+      "date": new Date(Date.now()).toDateString(),
+      "legend": legend.value,
+      "image": image.value,
+      "likes": [],
+      "comments": []
+    };
+    posts = [].concat(_toConsumableArray(posts), [newPost]);
+    dispatch({
+      type: "POST",
+      posts: posts
+    });
+    e.target.reset();
   }
 
   function handleNewComments(e) {
@@ -34154,10 +34136,6 @@ function ContextProvider(props) {
       handleNewComments: handleNewComments,
       user: user,
       updateLike: updateLike,
-      newPosts: newPosts,
-      handleChange: handleChange,
-      newUrl: newUrl,
-      handleInput: handleInput,
       addNewPost: addNewPost,
       addNewComment: addNewComment,
       newName: newName,
@@ -34239,7 +34217,8 @@ function FeedItem() {
       addNewComment = _useContext.addNewComment,
       handleNewComments = _useContext.handleNewComments;
 
-  var posts = state.posts;
+  var posts = state.posts,
+      newComment = state.newComment;
   return /*#__PURE__*/_react.default.createElement("div", null, posts.map(function (post) {
     return /*#__PURE__*/_react.default.createElement("article", {
       key: post.id,
@@ -34302,7 +34281,7 @@ function FeedItem() {
       }
     }, /*#__PURE__*/_react.default.createElement("input", {
       type: "text",
-      value: state.newComment,
+      value: newComment,
       onChange: handleNewComments,
       name: "comment",
       className: "add_comment",
@@ -34337,10 +34316,6 @@ function Add() {
   var _React$createElement;
 
   var _useContext = (0, _react.useContext)(_Context.Context),
-      newPosts = _useContext.newPosts,
-      handleChange = _useContext.handleChange,
-      newUrl = _useContext.newUrl,
-      handleInput = _useContext.handleInput,
       addNewPost = _useContext.addNewPost;
 
   return /*#__PURE__*/_react.default.createElement("form", {
@@ -34350,8 +34325,6 @@ function Add() {
     className: "textarea"
   }, /*#__PURE__*/_react.default.createElement("label", null, "New post: "), /*#__PURE__*/_react.default.createElement("textarea", {
     id: "legend",
-    value: newPosts,
-    onChange: handleChange,
     className: "statu",
     name: "legend",
     rows: "6",
@@ -34362,8 +34335,6 @@ function Add() {
   }, /*#__PURE__*/_react.default.createElement("label", null, "Picture url: "), /*#__PURE__*/_react.default.createElement("input", (_React$createElement = {
     id: "image",
     type: "text",
-    value: newUrl,
-    onChange: handleInput,
     className: "image_url",
     name: "image"
   }, _defineProperty(_React$createElement, "type", "url"), _defineProperty(_React$createElement, "required", true), _React$createElement)))), /*#__PURE__*/_react.default.createElement("button", {
@@ -34513,7 +34484,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61406" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49683" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -9,12 +9,13 @@ function reducer(state, action) {
         case "POST": {
             return {
                 ...state,
-                posts: action.posts
+               posts: state.posts = action.posts
             }
         }
         case "ADD_COMMENT": {
             const newComments = state.posts.map(post => {
-                if (post.id === action.id) {
+                if (post.id == action.id) {
+                    console.log(action.id);
                     return {
                         ...post,
                         comments: [...post.comments, action.comment]
@@ -22,11 +23,14 @@ function reducer(state, action) {
                 }
                 return post;
             })
+            
             return {
                 ...state,
                 posts: newComments
             }
+            
         }
+        
     }
 }
 
@@ -36,10 +40,11 @@ function ContextProvider(props) {
         comments: [],
         comment: ''
     });
+
+    let {posts} = state;
+
     const [user, setUser] = useState([]);
     const [like, setLike] = useState(0);
-    const [newPosts, setNewPosts] = useState('');
-    const [newUrl, setNewUrl] = useState('');
     const [newName, setNewName] = useState('');
     const [newProfile, setNewProfile] = useState('');
 
@@ -67,9 +72,8 @@ function ContextProvider(props) {
 
     }
 
-    function addNewComment(e) {
+    function addNewComment(e, id) {
         e.preventDefault();
-        dispatch({type: "ADD_COMMENT", comments: comment});
         const {comment} = e.target;
 
         const newComment = {
@@ -79,39 +83,7 @@ function ContextProvider(props) {
             "date": new Date(Date.now()).toDateString()
         }
 
-        console.log(newComment);
-        e.target.reset();
-    }
-
-    function addNewPost(e) {
-        e.preventDefault();
-
-        const newPost = {
-            "id": Date.now(),
-            "userName": "Clopedia Nomenjanahary",
-            "date": new Date(Date.now()).toDateString(),
-            "legend": newPosts,
-            "image": newUrl,
-            "likes": [
-                {
-                    "userId": 1606827064330,
-                    "likedId": Date.now(),
-                    "like": 0
-                }
-            ],
-            "comments": [
-                {
-                    "id": Date.now(),
-                    "userId": 1606827064330,
-                    "comment": "",
-                    "date": new Date(Date.now()).toDateString()
-                }
-            ]
-        }
-
-        posts.push(newPost);
-
-        setPosts([...posts]);
+        dispatch({type: "ADD_COMMENT", comment: newComment, id: id});
         e.target.reset();
     }
 
@@ -140,12 +112,24 @@ function ContextProvider(props) {
         console.log(newUser);
     }
 
-    function handleChange(e) {
-        setNewPosts(e.target.value);
-    }
+    function addNewPost(e) {
+        e.preventDefault();
+        const {legend, image} = e.target;
 
-    function handleInput(e) {
-        setNewUrl(e.target.value);
+        const newPost = {
+            "id": Date.now(),
+            "userName": "Clopedia",
+            "date": new Date(Date.now()).toDateString(),
+            "legend": legend.value,
+            "image": image.value,
+            "likes": [],
+            "comments": []
+        }
+        
+
+        posts = [...posts, newPost];
+        dispatch({type: "POST", posts: posts});
+        e.target.reset();
     }
 
     function handleNewComments(e) {
@@ -162,7 +146,7 @@ function ContextProvider(props) {
     }
 
     return (
-        <Context.Provider value={{state, dispatch, handleNewComments, user, updateLike, newPosts, handleChange, newUrl, handleInput, addNewPost, addNewComment, newName, newProfile, typeNewName, typeNewUrlImage, updateUserName}}>
+        <Context.Provider value={{state, dispatch, handleNewComments, user, updateLike, addNewPost, addNewComment, newName, newProfile, typeNewName, typeNewUrlImage, updateUserName}}>
             {props.children}
         </Context.Provider>
     )
