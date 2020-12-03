@@ -19,8 +19,11 @@ button {
 }
 
 .user_profile{
-    width: 30%;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
+    margin-inline-start: 32px;
+    margin-block-start: -8px;
 }
 
 .user_name {
@@ -40,6 +43,11 @@ button {
     text-decoration: none;
     font-size: 18px;
 }
+
+.link_user {
+    display: flex;
+}
+
 
 .post {
     border-bottom: 2px solid gray;
@@ -128,6 +136,10 @@ h4 {
 
 .dateOfComment {
     margin-top: -50px;
+}
+
+.username {
+    margin-block-start: 0;
 }
 
 input[type="text"] {

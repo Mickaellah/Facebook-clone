@@ -2,16 +2,17 @@ import React, {useContext} from 'react';
 import {Context} from '../Context';
 
 export default function FeedItem() {
-    const {state, dispatch, updateLike, user, addNewComment, handleNewComments} = useContext(Context);
-    const {posts, newComment} = state;
+    const {state, dispatch, updateLike, addNewComment, handleNewComments} = useContext(Context);
+    const {posts, newComment, loading, users} = state;
     return (
         <div>
+            {loading && <p>Loading...</p>}
             {
                 posts.map((post) => {
                     return (
                         <article key={post.id} className="post">
                             <div className="heading">
-                                {user.map((user) => 
+                                {users.map((user) => 
                                     <div key={user.userId} className="user">
                                         <img className="profile_image" id={user.userId} src={user.userProfilePhoto} alt="Profile" />
                                         <h3 className="header">{user.userName}</h3>
@@ -33,7 +34,7 @@ export default function FeedItem() {
                                         }
                                 </div>
                                 <div className="comments_container">
-                                    {user.map((user) => 
+                                    {users.map((user) => 
                                         <div className="friends" key={user.userId}>
                                             <img className="profile_image" id={user.userId} src={user.userProfilePhoto} alt="profile picture" />
                                             <h4 className="user_name">{user.userName}</h4>

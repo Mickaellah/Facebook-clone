@@ -33856,62 +33856,62 @@ if ("development" !== "production") {
 },{"react-router":"node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"node_modules/react/index.js","history":"node_modules/history/esm/history.js","prop-types":"node_modules/prop-types/index.js","tiny-warning":"node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"PostData.json":[function(require,module,exports) {
 module.exports = [{
   "id": 1606718446833,
-  "userId": 1606827064330,
+  "userId": 1,
   "userName": "Clopedia Nomenjanahary",
   "date": "30/11/2020",
   "legend": "Cool day 💥⛅⛅",
   "image": "https://eternalarrival.com/wp-content/uploads/2020/07/Copy-of-Untitled-Design-3.jpg",
   "likes": [{
-    "userId": 1606827064330,
+    "userId": 1,
     "likedId": 1,
     "like": 0
   }],
   "comments": [{
     "id": 1606801488981,
-    "userId": 1606827064330,
+    "userId": 1,
     "comment": "Nice pic!!!",
     "date": "30/11/2020"
   }]
 }, {
   "id": 1606718473274,
-  "userId": 1606827064330,
+  "userId": 1,
   "userName": "Clopedia Nomenjanahary",
   "date": "29/11/2020",
   "legend": "Jejus is my saviour 🙏🙏",
   "image": "https://www.livingfaith.in/uploads/news/newsc74854dac423ba57b2b79fa89ae5f8ad.jpg",
   "likes": [{
-    "userId": 1606827064330,
+    "userId": 1,
     "likedId": 3,
     "like": 0
   }],
   "comments": [{
     "id": 1606801523412,
-    "userId": 1606827064330,
+    "userId": 1,
     "comment": "Cool 😘",
     "date": "29/11/2020"
   }]
 }, {
   "id": 1606718492294,
-  "userId": 1606827064330,
+  "userId": 1,
   "userName": "Clopedia Nomenjanahary",
   "date": "05/11/2020",
   "legend": "Not perfect 😂🤣",
   "image": "https://onja.org/wp-content/uploads/2019/08/Clopedia@2x-430x520.jpg",
   "likes": [{
-    "userId": 1606827064330,
+    "userId": 1,
     "likedId": 5,
     "like": 0
   }],
   "comments": [{
     "id": 1606801547948,
-    "userId": 1606827064330,
+    "userId": 1,
     "comment": "Love it ❤❤",
     "date": "15/11/2020"
   }]
 }];
 },{}],"userData.json":[function(require,module,exports) {
 module.exports = [{
-  "userId": 1606827064330,
+  "userId": 1,
   "userName": "Clopedia",
   "userProfilePhoto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTagsUnpn2eGgUbTay4AxZcbHQT6TWneoMplw&usqp=CAU"
 }];
@@ -33968,6 +33968,15 @@ exports.Context = Context;
 
 function reducer(state, action) {
   switch (action.type) {
+    case "LOAD_DATA":
+      {
+        return _objectSpread(_objectSpread({}, state), {}, {
+          loading: false,
+          posts: _PostData.default,
+          users: _userData.default
+        });
+      }
+
     case "POST":
       {
         return _objectSpread(_objectSpread({}, state), {}, {
@@ -33991,14 +34000,36 @@ function reducer(state, action) {
           posts: newComments
         });
       }
+
+    case "CURRENT_USER":
+      {
+        var newUser = state.users.map(function (user) {
+          if (user.userId == state.currentUser) {
+            return _objectSpread(_objectSpread({}, user), {}, {
+              userName: action.userName,
+              userProfilePhoto: action.userProfilePhoto
+            });
+          }
+
+          return user;
+        });
+        return _objectSpread(_objectSpread({}, state), {}, {
+          users: newUser
+        });
+      }
   }
+
+  return state;
 }
 
 function ContextProvider(props) {
   var _React$useReducer = _react.default.useReducer(reducer, {
+    loading: true,
     posts: [],
     comments: [],
-    comment: ''
+    comment: '',
+    users: [],
+    currentUser: 1
   }),
       _React$useReducer2 = _slicedToArray(_React$useReducer, 2),
       state = _React$useReducer2[0],
@@ -34006,35 +34037,20 @@ function ContextProvider(props) {
 
   var posts = state.posts;
 
-  var _useState = (0, _react.useState)([]),
+  var _useState = (0, _react.useState)(0),
       _useState2 = _slicedToArray(_useState, 2),
-      user = _useState2[0],
-      setUser = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(0),
-      _useState4 = _slicedToArray(_useState3, 2),
-      like = _useState4[0],
-      setLike = _useState4[1];
-
-  var _useState5 = (0, _react.useState)(''),
-      _useState6 = _slicedToArray(_useState5, 2),
-      newName = _useState6[0],
-      setNewName = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(''),
-      _useState8 = _slicedToArray(_useState7, 2),
-      newProfile = _useState8[0],
-      setNewProfile = _useState8[1];
+      like = _useState2[0],
+      setLike = _useState2[1];
 
   (0, _react.useEffect)(function () {
-    dispatch({
-      type: "POST",
-      posts: _PostData.default
-    });
+    setTimeout(function () {
+      '';
+
+      dispatch({
+        type: "LOAD_DATA"
+      });
+    }, 1000);
   }, []);
-  (0, _react.useEffect)(function () {
-    setUser(_userData.default);
-  }, [user]);
 
   function updateLike(id) {
     console.log(id);
@@ -34068,34 +34084,11 @@ function ContextProvider(props) {
     e.target.reset();
   }
 
-  function updateUserName(e, id) {
-    e.preventDefault();
-    var _e$target = e.target,
-        userName = _e$target.userName,
-        imageUrl = _e$target.imageUrl;
-    var newUser = {
-      "userId": 1606827064330,
-      "userName": userName.value,
-      "userProfilePhoto": imageUrl.value
-    };
-    posts.map(function (post) {
-      if (post.userId = id) {
-        return _objectSpread(_objectSpread({}, post), {}, {
-          userName: post.userName.push(newUser)
-        });
-      }
-
-      return post;
-    });
-    setPosts(_toConsumableArray(posts));
-    console.log(newUser);
-  }
-
   function addNewPost(e) {
     e.preventDefault();
-    var _e$target2 = e.target,
-        legend = _e$target2.legend,
-        image = _e$target2.image;
+    var _e$target = e.target,
+        legend = _e$target.legend,
+        image = _e$target.image;
     var newPost = {
       "id": Date.now(),
       "userName": "Clopedia",
@@ -34121,28 +34114,14 @@ function ContextProvider(props) {
     });
   }
 
-  function typeNewName(e) {
-    setNewName(e.target.value);
-  }
-
-  function typeNewUrlImage(e) {
-    setNewProfile(e.target.value);
-  }
-
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
       state: state,
       dispatch: dispatch,
       handleNewComments: handleNewComments,
-      user: user,
       updateLike: updateLike,
       addNewPost: addNewPost,
-      addNewComment: addNewComment,
-      newName: newName,
-      newProfile: newProfile,
-      typeNewName: typeNewName,
-      typeNewUrlImage: typeNewUrlImage,
-      updateUserName: updateUserName
+      addNewComment: addNewComment
     }
   }, props.children);
 }
@@ -34166,8 +34145,10 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function Header() {
   var _useContext = (0, _react.useContext)(_Context.Context),
-      user = _useContext.user;
+      state = _useContext.state,
+      dispatch = _useContext.dispatch;
 
+  var users = state.users;
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "main_heading"
   }, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h1", null, "OnjaBook")), /*#__PURE__*/_react.default.createElement("nav", null, /*#__PURE__*/_react.default.createElement("ul", {
@@ -34178,13 +34159,15 @@ function Header() {
   }, "Feed")), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/add",
     className: "link"
-  }, "Add post")), /*#__PURE__*/_react.default.createElement("li", null, user.map(function (user) {
+  }, "Add post")), /*#__PURE__*/_react.default.createElement("li", {
+    className: "list_item"
+  }, users.map(function (user) {
     return /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
       to: "/option",
       key: user.userId,
       className: "link link_user"
     }, /*#__PURE__*/_react.default.createElement("p", {
-      className: "user_name"
+      className: "username"
     }, user.userName), /*#__PURE__*/_react.default.createElement("img", {
       className: "user_profile",
       src: user.userProfilePhoto,
@@ -34213,19 +34196,20 @@ function FeedItem() {
       state = _useContext.state,
       dispatch = _useContext.dispatch,
       updateLike = _useContext.updateLike,
-      user = _useContext.user,
       addNewComment = _useContext.addNewComment,
       handleNewComments = _useContext.handleNewComments;
 
   var posts = state.posts,
-      newComment = state.newComment;
-  return /*#__PURE__*/_react.default.createElement("div", null, posts.map(function (post) {
+      newComment = state.newComment,
+      loading = state.loading,
+      users = state.users;
+  return /*#__PURE__*/_react.default.createElement("div", null, loading && /*#__PURE__*/_react.default.createElement("p", null, "Loading..."), posts.map(function (post) {
     return /*#__PURE__*/_react.default.createElement("article", {
       key: post.id,
       className: "post"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "heading"
-    }, user.map(function (user) {
+    }, users.map(function (user) {
       return /*#__PURE__*/_react.default.createElement("div", {
         key: user.userId,
         className: "user"
@@ -34256,7 +34240,7 @@ function FeedItem() {
       }, like.like);
     })), /*#__PURE__*/_react.default.createElement("div", {
       className: "comments_container"
-    }, user.map(function (user) {
+    }, users.map(function (user) {
       return /*#__PURE__*/_react.default.createElement("div", {
         className: "friends",
         key: user.userId
@@ -34358,31 +34342,77 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function Option() {
   var _useContext = (0, _react.useContext)(_Context.Context),
-      newName = _useContext.newName,
-      newProfile = _useContext.newProfile,
-      typeNewName = _useContext.typeNewName,
-      typeNewUrlImage = _useContext.typeNewUrlImage,
-      updateUserName = _useContext.updateUserName;
+      state = _useContext.state,
+      dispatch = _useContext.dispatch;
+
+  var users = state.users,
+      currentUser = state.currentUser;
+
+  var _useState = (0, _react.useState)(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      userName = _useState2[0],
+      setUserName = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      userProfilePhoto = _useState4[0],
+      setUerProfilePhoto = _useState4[1];
+
+  var currentUserObject = users.find(function (user) {
+    return user.userId === currentUser;
+  }) || {
+    userName: '',
+    userProfilePhoto: ''
+  };
+  (0, _react.useEffect)(function () {
+    setUserName(currentUserObject.userName);
+    setUerProfilePhoto(currentUserObject.userProfilePhoto);
+  }, [users]);
+
+  function handleOptions(e) {
+    e.preventDefault();
+    dispatch({
+      type: "CURRENT_USER",
+      userName: userName,
+      userProfilePhoto: userProfilePhoto
+    });
+  }
 
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, "Options: "), /*#__PURE__*/_react.default.createElement("form", {
-    onSubmit: updateUserName
+    onSubmit: handleOptions
   }, /*#__PURE__*/_react.default.createElement("fieldset", {
     className: "input_user_name"
   }, /*#__PURE__*/_react.default.createElement("label", {
     className: "userName"
   }, "UserName: "), /*#__PURE__*/_react.default.createElement("input", {
-    value: newName,
-    onChange: typeNewName,
+    value: userName,
+    onChange: function onChange(e) {
+      return setUserName(e.target.value);
+    },
     type: "text",
     name: "userName",
     placeholder: "Type your username here"
   })), /*#__PURE__*/_react.default.createElement("fieldset", {
     className: "input_profile"
   }, /*#__PURE__*/_react.default.createElement("label", null, "Profile picture: "), /*#__PURE__*/_react.default.createElement("input", {
-    value: newProfile,
-    onChange: typeNewUrlImage,
+    value: userProfilePhoto,
+    onChange: function onChange(e) {
+      return setUerProfilePhoto(e.target.value);
+    },
     className: "image_url",
     name: "imageUrl",
     type: "url",

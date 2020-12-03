@@ -3,7 +3,8 @@ import {Link} from 'react-router-dom';
 import {Context} from '../Context';
 
 export default function Header() {
-    const {user} = useContext(Context);
+    const {state, dispatch} = useContext(Context);
+    const {users} = state;
     return (
         <div className="main_heading">
             <header>
@@ -23,12 +24,12 @@ export default function Header() {
                             Add post
                         </Link>
                     </li>
-                    <li>
+                    <li className="list_item">
                         {
-                            user.map((user) => {
+                            users.map((user) => {
                                 return (
                                     <Link to="/option" key={user.userId} className="link link_user">
-                                        <p className="user_name">{user.userName}</p>
+                                        <p className="username">{user.userName}</p>
                                         <img className="user_profile" src={user.userProfilePhoto} alt="User profile" />
                                     </Link>
                                 )

@@ -1,14 +1,14 @@
 [
     {
         "id": 1606718446833,
-        "userId": 1606827064330,
+        "userId": 1,
         "userName": "Clopedia Nomenjanahary",
         "date": "30/11/2020",
         "legend": "Cool day 💥⛅⛅",
         "image": "https://eternalarrival.com/wp-content/uploads/2020/07/Copy-of-Untitled-Design-3.jpg",
         "likes": [
             {
-                "userId": 1606827064330,
+                "userId": 1,
                 "likedId": 1,
                 "like": 0
             }
@@ -16,7 +16,7 @@
         "comments": [
             {
                 "id": 1606801488981,
-                "userId": 1606827064330,
+                "userId": 1,
                 "comment": "Nice pic!!!",
                 "date": "30/11/2020"
             }
@@ -24,14 +24,14 @@
     },
     {
         "id": 1606718473274,
-        "userId": 1606827064330,
+        "userId": 1,
         "userName": "Clopedia Nomenjanahary",
         "date": "29/11/2020",
         "legend": "Jejus is my saviour 🙏🙏",
         "image": "https://www.livingfaith.in/uploads/news/newsc74854dac423ba57b2b79fa89ae5f8ad.jpg",
         "likes": [
             {
-                "userId": 1606827064330,
+                "userId": 1,
                 "likedId": 3,
                 "like": 0
             }
@@ -39,7 +39,7 @@
         "comments": [
             {
                 "id": 1606801523412,
-                "userId": 1606827064330,
+                "userId": 1,
                 "comment": "Cool 😘",
                 "date": "29/11/2020"
             }
@@ -47,14 +47,14 @@
     },
     {
         "id": 1606718492294,
-        "userId": 1606827064330,
+        "userId": 1,
         "userName": "Clopedia Nomenjanahary",
         "date": "05/11/2020",
         "legend": "Not perfect 😂🤣",
         "image": "https://onja.org/wp-content/uploads/2019/08/Clopedia@2x-430x520.jpg",
         "likes": [
             {
-                "userId": 1606827064330,
+                "userId": 1,
                 "likedId": 5,
                 "like": 0
             }
@@ -62,7 +62,7 @@
         "comments": [
             {
                 "id": 1606801547948,
-                "userId": 1606827064330,
+                "userId": 1,
                 "comment": "Love it ❤❤",
                 "date": "15/11/2020"
             }

@@ -6,6 +6,14 @@ const Context = React.createContext();
 
 function reducer(state, action) {
     switch (action.type) {
+        case "LOAD_DATA": {
+            return {
+                ...state,
+                loading: false,
+                posts: PostData,
+                users: UserData
+            }
+        }
         case "POST": {
             return {
                 ...state,
@@ -30,31 +38,48 @@ function reducer(state, action) {
             }
             
         }
-        
+        case "CURRENT_USER": {
+            const newUser = state.users.map(user => {
+                if (user.userId == state.currentUser) {
+                    return {
+                        ...user,
+                        userName: action.userName,
+                        userProfilePhoto: action.userProfilePhoto
+                    }
+                }
+                return user;
+            });
+            return {
+                ...state,
+                users: newUser
+            }
+        }
     }
+    return state
 }
 
 function ContextProvider(props) {
     const [state, dispatch] = React.useReducer(reducer, {
+        loading: true,
         posts: [],
         comments: [],
-        comment: ''
+        comment: '',
+        users: [],
+        currentUser: 1,
     });
 
     let {posts} = state;
 
-    const [user, setUser] = useState([]);
     const [like, setLike] = useState(0);
-    const [newName, setNewName] = useState('');
-    const [newProfile, setNewProfile] = useState('');
+
 
     useEffect(() => {
-         dispatch({type: "POST", posts: PostData});
+        setTimeout(() => {
+            '';
+            dispatch({type: "LOAD_DATA"});
+        }, 1000);
     }, []);
 
-    useEffect(() => {
-        setUser(UserData);
-    }, [user]);
 
     function updateLike(id) {
         console.log(id);
@@ -87,31 +112,6 @@ function ContextProvider(props) {
         e.target.reset();
     }
 
-    function updateUserName(e, id) {
-        e.preventDefault();
-        const {userName, imageUrl} = e.target;
-
-        const newUser = {
-            "userId": 1606827064330,
-            "userName": userName.value,
-            "userProfilePhoto": imageUrl.value
-        }
-
-        posts.map(post => {
-            if (post.userId = id) {
-                return {
-                    ...post,
-                    userName: post.userName.push(newUser)
-                }
-            }
-            return post;
-        })
-
-        setPosts([...posts]);
-
-        console.log(newUser);
-    }
-
     function addNewPost(e) {
         e.preventDefault();
         const {legend, image} = e.target;
@@ -137,16 +137,8 @@ function ContextProvider(props) {
         dispatch({type: "ADD_COMMENT", comments: e.target.value})
     }
 
-    function typeNewName(e) {
-        setNewName(e.target.value);
-    }
-
-    function typeNewUrlImage(e) {
-        setNewProfile(e.target.value);
-    }
-
     return (
-        <Context.Provider value={{state, dispatch, handleNewComments, user, updateLike, addNewPost, addNewComment, newName, newProfile, typeNewName, typeNewUrlImage, updateUserName}}>
+        <Context.Provider value={{state, dispatch, handleNewComments, updateLike, addNewPost, addNewComment}}>
             {props.children}
         </Context.Provider>
     )
