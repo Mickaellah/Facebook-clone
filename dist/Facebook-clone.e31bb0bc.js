@@ -33863,7 +33863,7 @@ module.exports = [{
   "image": "https://eternalarrival.com/wp-content/uploads/2020/07/Copy-of-Untitled-Design-3.jpg",
   "likes": [{
     "userId": 1,
-    "likedId": 1,
+    "likedId": 1607056314175,
     "like": 0
   }],
   "comments": [{
@@ -33881,7 +33881,7 @@ module.exports = [{
   "image": "https://www.livingfaith.in/uploads/news/newsc74854dac423ba57b2b79fa89ae5f8ad.jpg",
   "likes": [{
     "userId": 1,
-    "likedId": 3,
+    "likedId": 1607056324178,
     "like": 0
   }],
   "comments": [{
@@ -33899,7 +33899,7 @@ module.exports = [{
   "image": "https://onja.org/wp-content/uploads/2019/08/Clopedia@2x-430x520.jpg",
   "likes": [{
     "userId": 1,
-    "likedId": 5,
+    "likedId": 1607056344906,
     "like": 0
   }],
   "comments": [{
@@ -34036,12 +34036,6 @@ function ContextProvider(props) {
       dispatch = _React$useReducer2[1];
 
   var posts = state.posts;
-
-  var _useState = (0, _react.useState)(0),
-      _useState2 = _slicedToArray(_useState, 2),
-      like = _useState2[0],
-      setLike = _useState2[1];
-
   (0, _react.useEffect)(function () {
     setTimeout(function () {
       '';
@@ -34051,21 +34045,6 @@ function ContextProvider(props) {
       });
     }, 1000);
   }, []);
-
-  function updateLike(id) {
-    console.log(id);
-    posts.map(function (post) {
-      if (post.id == id) {
-        return _objectSpread(_objectSpread({}, post), {}, {
-          likes: post.likes + 1
-        });
-      }
-
-      return post;
-    });
-    console.log(likes);
-    setLike(_toConsumableArray(posts));
-  }
 
   function addNewComment(e, id) {
     e.preventDefault();
@@ -34095,7 +34074,11 @@ function ContextProvider(props) {
       "date": new Date(Date.now()).toDateString(),
       "legend": legend.value,
       "image": image.value,
-      "likes": [],
+      "likes": [{
+        "userId": 1,
+        "likedId": new Date(),
+        "like": 0
+      }],
       "comments": []
     };
     posts = [].concat(_toConsumableArray(posts), [newPost]);
@@ -34119,7 +34102,6 @@ function ContextProvider(props) {
       state: state,
       dispatch: dispatch,
       handleNewComments: handleNewComments,
-      updateLike: updateLike,
       addNewPost: addNewPost,
       addNewComment: addNewComment
     }
@@ -34191,11 +34173,22 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function FeedItem() {
   var _useContext = (0, _react.useContext)(_Context.Context),
       state = _useContext.state,
       dispatch = _useContext.dispatch,
-      updateLike = _useContext.updateLike,
       addNewComment = _useContext.addNewComment,
       handleNewComments = _useContext.handleNewComments;
 
@@ -34203,6 +34196,16 @@ function FeedItem() {
       newComment = state.newComment,
       loading = state.loading,
       users = state.users;
+
+  var _useState = (0, _react.useState)(0),
+      _useState2 = _slicedToArray(_useState, 2),
+      like = _useState2[0],
+      setLike = _useState2[1];
+
+  function updateLike() {
+    setLike(like === 0 ? like + 1 : like - 1);
+  }
+
   return /*#__PURE__*/_react.default.createElement("div", null, loading && /*#__PURE__*/_react.default.createElement("p", null, "Loading..."), posts.map(function (post) {
     return /*#__PURE__*/_react.default.createElement("article", {
       key: post.id,
@@ -34229,15 +34232,15 @@ function FeedItem() {
     }, /*#__PURE__*/_react.default.createElement("button", {
       type: "button",
       onClick: function onClick(e) {
-        return updateLike(e, post.id);
+        return updateLike(e);
       },
       id: post.id,
       className: "likebtn"
-    }, "Likes"), post.likes.map(function (like) {
+    }, "Likes"), post.likes.map(function (love) {
       return /*#__PURE__*/_react.default.createElement("span", {
-        key: like.likedId,
+        key: love.likedId,
         className: "likes_number"
-      }, like.like);
+      }, like);
     })), /*#__PURE__*/_react.default.createElement("div", {
       className: "comments_container"
     }, users.map(function (user) {
@@ -34514,7 +34517,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49683" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50021" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

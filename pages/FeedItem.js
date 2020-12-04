@@ -1,9 +1,15 @@
-import React, {useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import {Context} from '../Context';
 
 export default function FeedItem() {
-    const {state, dispatch, updateLike, addNewComment, handleNewComments} = useContext(Context);
+    const {state, dispatch, addNewComment, handleNewComments} = useContext(Context);
     const {posts, newComment, loading, users} = state;
+    const [like, setLike] = useState(0);
+
+    function updateLike() {
+        setLike(like === 0 ? like + 1 : like - 1);
+    }
+
     return (
         <div>
             {loading && <p>Loading...</p>}
@@ -24,11 +30,11 @@ export default function FeedItem() {
                                 <p>{post.legend}</p>
                                 <img src={`${post.image}`} alt="Post" />
                                 <div className="likes">
-                                    <button type="button" onClick={(e) => updateLike(e, post.id)} id={post.id} className="likebtn">Likes</button>
+                                    <button type="button" onClick={(e) => updateLike(e)} id={post.id} className="likebtn">Likes</button>
                                     {
-                                        post.likes.map(like => {
+                                        post.likes.map(love => {
                                             return ( 
-                                                <span key={like.likedId} className="likes_number">{like.like}</span>
+                                                <span key={love.likedId} className="likes_number">{like}</span>
                                             )
                                         })
                                         }

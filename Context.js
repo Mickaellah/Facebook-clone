@@ -70,8 +70,6 @@ function ContextProvider(props) {
 
     let {posts} = state;
 
-    const [like, setLike] = useState(0);
-
 
     useEffect(() => {
         setTimeout(() => {
@@ -79,23 +77,6 @@ function ContextProvider(props) {
             dispatch({type: "LOAD_DATA"});
         }, 1000);
     }, []);
-
-
-    function updateLike(id) {
-        console.log(id);
-        posts.map(post => {
-            if (post.id == id) {
-                return {
-                    ...post,
-                    likes: post.likes + 1
-                }
-            }
-            return post
-        })
-        console.log(likes);
-        setLike([...posts]);
-
-    }
 
     function addNewComment(e, id) {
         e.preventDefault();
@@ -122,7 +103,13 @@ function ContextProvider(props) {
             "date": new Date(Date.now()).toDateString(),
             "legend": legend.value,
             "image": image.value,
-            "likes": [],
+            "likes": [
+                {
+                    "userId": 1,
+                    "likedId": new Date(),
+                    "like": 0
+                }
+            ],
             "comments": []
         }
         
@@ -138,7 +125,7 @@ function ContextProvider(props) {
     }
 
     return (
-        <Context.Provider value={{state, dispatch, handleNewComments, updateLike, addNewPost, addNewComment}}>
+        <Context.Provider value={{state, dispatch, handleNewComments, addNewPost, addNewComment}}>
             {props.children}
         </Context.Provider>
     )
