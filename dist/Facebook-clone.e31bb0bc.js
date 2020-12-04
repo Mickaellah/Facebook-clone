@@ -33988,7 +33988,6 @@ function reducer(state, action) {
       {
         var newComments = state.posts.map(function (post) {
           if (post.id == action.id) {
-            console.log(action.id);
             return _objectSpread(_objectSpread({}, post), {}, {
               comments: [].concat(_toConsumableArray(post.comments), [action.comment])
             });
@@ -34025,17 +34024,18 @@ function reducer(state, action) {
 function ContextProvider(props) {
   var _React$useReducer = _react.default.useReducer(reducer, {
     loading: true,
-    posts: [],
+    posts: JSON.parse(localStorage.getItem('posts')) || [],
     comments: [],
     comment: '',
-    users: [],
+    users: JSON.parse(localStorage.getItem('users')) || [],
     currentUser: 1
   }),
       _React$useReducer2 = _slicedToArray(_React$useReducer, 2),
       state = _React$useReducer2[0],
       dispatch = _React$useReducer2[1];
 
-  var posts = state.posts;
+  var posts = state.posts,
+      users = state.users;
   (0, _react.useEffect)(function () {
     setTimeout(function () {
       '';
@@ -34045,6 +34045,12 @@ function ContextProvider(props) {
       });
     }, 1000);
   }, []);
+  (0, _react.useEffect)(function () {
+    localStorage.setItem('posts', JSON.stringify(posts));
+  }, [posts]);
+  (0, _react.useEffect)(function () {
+    localStorage.setItem('users', JSON.stringify(users));
+  }, [users]);
 
   function addNewComment(e, id) {
     e.preventDefault();

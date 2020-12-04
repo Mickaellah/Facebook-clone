@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import PostData from './PostData.json';
 import UserData from './userData.json';
 
@@ -23,7 +23,6 @@ function reducer(state, action) {
         case "ADD_COMMENT": {
             const newComments = state.posts.map(post => {
                 if (post.id == action.id) {
-                    console.log(action.id);
                     return {
                         ...post,
                         comments: [...post.comments, action.comment]
@@ -61,14 +60,14 @@ function reducer(state, action) {
 function ContextProvider(props) {
     const [state, dispatch] = React.useReducer(reducer, {
         loading: true,
-        posts: [],
-        comments: [],
+        posts: JSON.parse(localStorage.getItem('posts')) || [],
+        comments: [], 
         comment: '',
-        users: [],
+        users: JSON.parse(localStorage.getItem('users')) || [],
         currentUser: 1,
     });
 
-    let {posts} = state;
+    let {posts, users} = state;
 
 
     useEffect(() => {
@@ -77,6 +76,14 @@ function ContextProvider(props) {
             dispatch({type: "LOAD_DATA"});
         }, 1000);
     }, []);
+
+    useEffect(() => {
+        localStorage.setItem('posts', JSON.stringify(posts));
+    }, [posts]);
+
+    useEffect(() => {
+        localStorage.setItem('users', JSON.stringify(users));
+    }, [users]);
 
     function addNewComment(e, id) {
         e.preventDefault();
