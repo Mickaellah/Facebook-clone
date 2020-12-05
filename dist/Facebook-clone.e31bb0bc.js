@@ -34175,64 +34175,7 @@ function Header() {
     }));
   })))));
 }
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../Context":"Context.js"}],"pages/FeedItem.js":[function(require,module,exports) {
-// import React, {useState, useContext} from 'react';
-// import {Context} from '../Context';
-// import PostComments from '../components/PostComments';
-// import PostLike from '../components/PostLike';
-// export default function FeedItem() {
-//     const {state, dispatch, addNewComment, handleNewComments} = useContext(Context);
-//     const {posts, newComment, loading, users} = state;
-//     const [like, setLike] = useState(0);
-//     function updateLike() {
-//         setLike(like === 0 ? like + 1 : like - 1);
-//     }
-//     return (
-//         <div>
-//             {loading && <p>Loading...</p>}
-//             {
-//                 posts.map((post) => {
-//                     return (
-//                         <article key={post.id} className="post">
-//                             <div className="heading">
-//                                 {users.map((user) => 
-//                                     <div key={user.userId} className="user">
-//                                         <img className="profile_image" id={user.userId} src={user.userProfilePhoto} alt="Profile" />
-//                                         <h3 className="header">{user.userName}</h3>
-//                                     </div>
-//                                 )}
-//                                 <p>{post.date}</p>
-//                             </div>
-//                             <div>
-//                                 <p>{post.legend}</p>
-//                                 <img src={`${post.image}`} alt="Post" />
-//                                 <div className="likes">
-//                                     {/* <button type="button" onClick={(e) => updateLike(e)} id={post.id} className="likebtn">Likes</button>
-//                                     {
-//                                         post.likes.map(love => {
-//                                             return ( 
-//                                                 <span key={love.likedId} className="likes_number">{like}</span>
-//                                             )
-//                                         })
-//                                         } */}
-//                                         {/* <PostLike /> */}
-//                                 </div>
-//                                 <div className="comments_container">
-//                                     <PostComments />
-//                                 </div>
-//                                 <form onSubmit={(e) => addNewComment(e, post.id)}>
-//                                     <input type="text" value={newComment} onChange={handleNewComments} name="comment" className="add_comment" placeholder="Add a comment..." required />
-//                                     <input type="submit" className="submit_comment" placeholder="Post" />
-//                                 </form>
-//                             </div>
-//                         </article>
-//                     )
-//                 })
-//             }
-//         </div>
-//     )
-// }
-},{}],"components/Post.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../Context":"Context.js"}],"components/Post.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34664,8 +34607,6 @@ var _reactRouterDom = require("react-router-dom");
 
 var _Header = _interopRequireDefault(require("./Header"));
 
-var _FeedItem = _interopRequireDefault(require("../pages/FeedItem"));
-
 var _Feed = _interopRequireDefault(require("../components/Feed"));
 
 var _Add = _interopRequireDefault(require("../pages/Add"));
@@ -34685,7 +34626,7 @@ function Menu() {
     path: "/option"
   }, /*#__PURE__*/_react.default.createElement(_Option.default, null)))));
 }
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./Header":"components/Header.js","../pages/FeedItem":"pages/FeedItem.js","../components/Feed":"components/Feed.js","../pages/Add":"pages/Add.js","../pages/Option":"pages/Option.js"}],"App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./Header":"components/Header.js","../components/Feed":"components/Feed.js","../pages/Add":"pages/Add.js","../pages/Option":"pages/Option.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34745,7 +34686,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49806" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51415" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -8,7 +8,6 @@ import {
 
 import Header from './Header';
 
-import FeedItem from '../pages/FeedItem';
 import Feed from '../components/Feed';
 import Add from '../pages/Add';
 import Option from '../pages/Option';
