@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, createContext} from 'react';
 import PostData from './PostData.json';
 import UserData from './userData.json';
 
-const Context = React.createContext();
+const Context = createContext();
 
 function reducer(state, action) {
     switch (action.type) {

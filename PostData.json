@@ -2,15 +2,17 @@
     {
         "id": 1606718446833,
         "userId": 1,
-        "userName": "Clopedia Nomenjanahary",
-        "date": "30/11/2020",
+        "date": 1607149814823,
         "legend": "Cool day 💥⛅⛅",
         "image": "https://eternalarrival.com/wp-content/uploads/2020/07/Copy-of-Untitled-Design-3.jpg",
         "likes": [
             {
                 "userId": 1,
-                "likedId": 1607056314175,
-                "like": 0
+                "likedId": 1
+            },
+            {
+                "userId": 2,
+                "likedId": 2
             }
         ],
         "comments": [
@@ -18,28 +20,26 @@
                 "id": 1,
                 "userId": 1,
                 "comment": "Nice pic!!!",
-                "date": "30/11/2020"
+                "date": 1607149833505
             },
             {
                 "id": 2,
                 "userId": 1,
                 "comment": "Nice",
-                "date": "31/11/2020"
+                "date": 1607149853735
             }
         ]
     },
     {
         "id": 1606718473274,
         "userId": 1,
-        "userName": "Clopedia Nomenjanahary",
-        "date": "29/11/2020",
+        "date": 1607149876418,
         "legend": "Jejus is my saviour 🙏🙏",
         "image": "https://www.livingfaith.in/uploads/news/newsc74854dac423ba57b2b79fa89ae5f8ad.jpg",
         "likes": [
             {
                 "userId": 1,
-                "likedId": 1607056324178,
-                "like": 0
+                "likedId": 1
             }
         ],
         "comments": [
@@ -47,42 +47,35 @@
                 "id": 1,
                 "userId": 1,
                 "comment": "Cool 😘",
-                "date": "29/11/2020"
+                "date": 1607149893339
             },
             {
                 "id": 2,
-                "userId": 1,
+                "userId": 2,
                 "comment": "Perfect",
-                "date": "30/11/2020"
+                "date": 1607149910699
             }
         ]
     },
     {
         "id": 1606718492294,
         "userId": 1,
-        "userName": "Clopedia Nomenjanahary",
-        "date": "05/11/2020",
+        "date": 1607149930116,
         "legend": "Not perfect 😂🤣",
         "image": "https://onja.org/wp-content/uploads/2019/08/Clopedia@2x-430x520.jpg",
-        "likes": [
-            {
-                "userId": 1,
-                "likedId": 1607056344906,
-                "like": 0
-            }
-        ],
+        "likes": [],
         "comments": [
             {
                 "id": 1,
                 "userId": 1,
                 "comment": "Love it ❤❤",
-                "date": "15/11/2020"
+                "date": 1607149941781
             },
             {
                 "id": 2,
                 "userId": 2,
                 "comment": "Lovely ❤❤",
-                "date": "16/11/2020"
+                "date": 1607149955563
             }
         ]
     }

@@ -1,16 +1,17 @@
 import React, {useContext} from 'react'
 
-import {Context} from '../Context'; 
+import { Context } from '../Context'; 
+import { PostContext } from '../components/Post';
 
 export default function PostComments() {
+    const { post } = useContext(PostContext);
     const {state} = useContext(Context);
-    const {posts} = state;
-    console.log(posts);
-    console.log(posts.comments);
+    const {users} = state;
+
     return (
         <div>
             {
-                posts.comments.map(comment => {
+                post.comments.map(comment => {
                     const commenter = users.find(user => user.userId === comment.userId);
                     return (
                         <div key={comment.id}>
