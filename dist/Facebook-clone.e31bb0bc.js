@@ -33992,7 +33992,7 @@ function reducer(state, action) {
     case "POST":
       {
         return _objectSpread(_objectSpread({}, state), {}, {
-          posts: state.posts = action.posts
+          posts: [].concat(_toConsumableArray(state.posts), [action.newPost])
         });
       }
 
@@ -34098,38 +34098,10 @@ function ContextProvider(props) {
   (0, _react.useEffect)(function () {
     localStorage.setItem('users', JSON.stringify(users));
   }, [users]);
-
-  function addNewPost(e) {
-    e.preventDefault();
-    var _e$target = e.target,
-        legend = _e$target.legend,
-        image = _e$target.image;
-    var newPost = {
-      "id": Date.now(),
-      "userName": "Clopedia",
-      "date": new Date(Date.now()).toDateString(),
-      "legend": legend.value,
-      "image": image.value,
-      "likes": [{
-        "userId": 1,
-        "likedId": new Date(),
-        "like": 0
-      }],
-      "comments": []
-    };
-    posts = [].concat(_toConsumableArray(posts), [newPost]);
-    dispatch({
-      type: "POST",
-      posts: posts
-    });
-    e.target.reset();
-  }
-
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
       state: state,
-      dispatch: dispatch,
-      addNewPost: addNewPost
+      dispatch: dispatch
     }
   }, props.children);
 }
@@ -34543,7 +34515,7 @@ function Feed() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = Add;
+exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -34555,11 +34527,55 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function Add() {
   var _React$createElement;
 
+  var _useState = (0, _react.useState)(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      newLegend = _useState2[0],
+      setNewLegend = _useState2[1];
+
+  var _useState3 = (0, _react.useState)('https://www.postoast.com/wp-content/uploads/2018/10/Miah-Dhanani-Photos-11.jpg'),
+      _useState4 = _slicedToArray(_useState3, 2),
+      imagePost = _useState4[0],
+      setImagePost = _useState4[1];
+
   var _useContext = (0, _react.useContext)(_Context.Context),
-      addNewPost = _useContext.addNewPost;
+      state = _useContext.state,
+      dispatch = _useContext.dispatch;
+
+  var currentUser = state.currentUser;
+
+  function addNewPost(e) {
+    e.preventDefault();
+    var newPost = {
+      "id": Date.now(),
+      "userId": currentUser,
+      "userName": "Clopedia",
+      "date": Date.now(),
+      "legend": newLegend,
+      "image": imagePost,
+      "likes": [],
+      "comments": []
+    };
+    dispatch({
+      type: "POST",
+      newPost: newPost
+    });
+    e.target.reset();
+  }
 
   return /*#__PURE__*/_react.default.createElement("form", {
     onSubmit: addNewPost,
@@ -34568,6 +34584,10 @@ function Add() {
     className: "textarea"
   }, /*#__PURE__*/_react.default.createElement("label", null, "New post: "), /*#__PURE__*/_react.default.createElement("textarea", {
     id: "legend",
+    value: newLegend,
+    onChange: function onChange(e) {
+      return setNewLegend(e.target.value);
+    },
     className: "statu",
     name: "legend",
     rows: "6",
@@ -34577,6 +34597,10 @@ function Add() {
     className: "input_profile"
   }, /*#__PURE__*/_react.default.createElement("label", null, "Picture url: "), /*#__PURE__*/_react.default.createElement("input", (_React$createElement = {
     id: "image",
+    value: imagePost,
+    onChange: function onChange(e) {
+      return setImagePost(e.target.value);
+    },
     type: "text",
     className: "image_url",
     name: "image"
@@ -34585,6 +34609,9 @@ function Add() {
     type: "submit"
   }, "Post"));
 }
+
+var _default = Add;
+exports.default = _default;
 },{"react":"node_modules/react/index.js","../Context":"Context.js"}],"pages/Option.js":[function(require,module,exports) {
 "use strict";
 
@@ -34774,7 +34801,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56447" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61219" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -17,7 +17,7 @@ function reducer(state, action) {
         case "POST": {
             return {
                 ...state,
-               posts: state.posts = action.posts
+               posts: [...state.posts, action.newPost]
             }
         }
         case "ADD_COMMENT": {
@@ -115,34 +115,8 @@ function ContextProvider(props) {
         localStorage.setItem('users', JSON.stringify(users));
     }, [users]);
 
-    function addNewPost(e) {
-        e.preventDefault();
-        const {legend, image} = e.target;
-
-        const newPost = {
-            "id": Date.now(),
-            "userName": "Clopedia",
-            "date": new Date(Date.now()).toDateString(),
-            "legend": legend.value,
-            "image": image.value,
-            "likes": [
-                {
-                    "userId": 1,
-                    "likedId": new Date(),
-                    "like": 0
-                }
-            ],
-            "comments": []
-        }
-        
-
-        posts = [...posts, newPost];
-        dispatch({type: "POST", posts: posts});
-        e.target.reset();
-    }
-
     return (
-        <Context.Provider value={{state, dispatch, addNewPost}}>
+        <Context.Provider value={{state, dispatch}}>
             {props.children}
         </Context.Provider>
     )
