@@ -1,5 +1,6 @@
 import React, {useState, useContext} from 'react';
 import {Context} from '../Context';
+import PostComments from '../components/PostComments';
 
 export default function FeedItem() {
     const {state, dispatch, addNewComment, handleNewComments} = useContext(Context);
@@ -40,20 +41,7 @@ export default function FeedItem() {
                                         }
                                 </div>
                                 <div className="comments_container">
-                                    {users.map((user) => 
-                                        <div className="friends" key={user.userId}>
-                                            <img className="profile_image" id={user.userId} src={user.userProfilePhoto} alt="profile picture" />
-                                            <h4 className="user_name">{user.userName}</h4>
-                                        </div>
-                                    )}
-                                </div>
-                                <div>
-                                    {post.comments.map((comment) => 
-                                        <div className="friends"  key={comment.id}>
-                                            <p>{comment.comment}</p>
-                                            <span className="dateOfComment">{comment.date}</span>
-                                        </div>
-                                    )}
+                                    <PostComments />
                                 </div>
                                 <form onSubmit={(e) => addNewComment(e, post.id)}>
                                     <input type="text" value={newComment} onChange={handleNewComments} name="comment" className="add_comment" placeholder="Add a comment..." required />

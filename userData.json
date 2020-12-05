@@ -3,5 +3,10 @@
         "userId": 1,
         "userName": "Clopedia",
         "userProfilePhoto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTagsUnpn2eGgUbTay4AxZcbHQT6TWneoMplw&usqp=CAU"
+    },
+    {
+        "userId": 2,
+        "userName": "Nomena",
+        "userProfilePhoto": "https://i.pinimg.com/474x/c0/75/42/c07542887489eb9db6981baa9e49eaf2.jpg"
     }
 ]

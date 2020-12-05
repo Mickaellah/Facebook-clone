@@ -33867,10 +33867,15 @@ module.exports = [{
     "like": 0
   }],
   "comments": [{
-    "id": 1606801488981,
+    "id": 1,
     "userId": 1,
     "comment": "Nice pic!!!",
     "date": "30/11/2020"
+  }, {
+    "id": 2,
+    "userId": 1,
+    "comment": "Nice",
+    "date": "31/11/2020"
   }]
 }, {
   "id": 1606718473274,
@@ -33885,10 +33890,15 @@ module.exports = [{
     "like": 0
   }],
   "comments": [{
-    "id": 1606801523412,
+    "id": 1,
     "userId": 1,
     "comment": "Cool 😘",
     "date": "29/11/2020"
+  }, {
+    "id": 2,
+    "userId": 1,
+    "comment": "Perfect",
+    "date": "30/11/2020"
   }]
 }, {
   "id": 1606718492294,
@@ -33903,10 +33913,15 @@ module.exports = [{
     "like": 0
   }],
   "comments": [{
-    "id": 1606801547948,
+    "id": 1,
     "userId": 1,
     "comment": "Love it ❤❤",
     "date": "15/11/2020"
+  }, {
+    "id": 2,
+    "userId": 2,
+    "comment": "Lovely ❤❤",
+    "date": "16/11/2020"
   }]
 }];
 },{}],"userData.json":[function(require,module,exports) {
@@ -33914,6 +33929,10 @@ module.exports = [{
   "userId": 1,
   "userName": "Clopedia",
   "userProfilePhoto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTagsUnpn2eGgUbTay4AxZcbHQT6TWneoMplw&usqp=CAU"
+}, {
+  "userId": 2,
+  "userName": "Nomena",
+  "userProfilePhoto": "https://i.pinimg.com/474x/c0/75/42/c07542887489eb9db6981baa9e49eaf2.jpg"
 }];
 },{}],"Context.js":[function(require,module,exports) {
 "use strict";
@@ -34163,7 +34182,42 @@ function Header() {
     }));
   })))));
 }
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../Context":"Context.js"}],"pages/FeedItem.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../Context":"Context.js"}],"components/PostComments.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = PostComments;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _Context = require("../Context");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function PostComments() {
+  var _useContext = (0, _react.useContext)(_Context.Context),
+      state = _useContext.state;
+
+  var posts = state.posts;
+  console.log(posts);
+  console.log(posts.comments);
+  return /*#__PURE__*/_react.default.createElement("div", null, posts.comments.map(function (comment) {
+    var commenter = users.find(function (user) {
+      return user.userId === comment.userId;
+    });
+    return /*#__PURE__*/_react.default.createElement("div", {
+      key: comment.id
+    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
+      src: commenter.userProfilePhoto,
+      alt: "commenter profile photo"
+    }), /*#__PURE__*/_react.default.createElement("h4", null, commenter.userName), /*#__PURE__*/_react.default.createElement("span", null, comment.date)), /*#__PURE__*/_react.default.createElement("p", null, comment.comment));
+  }));
+}
+},{"react":"node_modules/react/index.js","../Context":"Context.js"}],"pages/FeedItem.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34174,6 +34228,10 @@ exports.default = FeedItem;
 var _react = _interopRequireWildcard(require("react"));
 
 var _Context = require("../Context");
+
+var _PostComments = _interopRequireDefault(require("../components/PostComments"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -34249,26 +34307,7 @@ function FeedItem() {
       }, like);
     })), /*#__PURE__*/_react.default.createElement("div", {
       className: "comments_container"
-    }, users.map(function (user) {
-      return /*#__PURE__*/_react.default.createElement("div", {
-        className: "friends",
-        key: user.userId
-      }, /*#__PURE__*/_react.default.createElement("img", {
-        className: "profile_image",
-        id: user.userId,
-        src: user.userProfilePhoto,
-        alt: "profile picture"
-      }), /*#__PURE__*/_react.default.createElement("h4", {
-        className: "user_name"
-      }, user.userName));
-    })), /*#__PURE__*/_react.default.createElement("div", null, post.comments.map(function (comment) {
-      return /*#__PURE__*/_react.default.createElement("div", {
-        className: "friends",
-        key: comment.id
-      }, /*#__PURE__*/_react.default.createElement("p", null, comment.comment), /*#__PURE__*/_react.default.createElement("span", {
-        className: "dateOfComment"
-      }, comment.date));
-    })), /*#__PURE__*/_react.default.createElement("form", {
+    }, /*#__PURE__*/_react.default.createElement(_PostComments.default, null)), /*#__PURE__*/_react.default.createElement("form", {
       onSubmit: function onSubmit(e) {
         return addNewComment(e, post.id);
       }
@@ -34287,7 +34326,7 @@ function FeedItem() {
     }))));
   }));
 }
-},{"react":"node_modules/react/index.js","../Context":"Context.js"}],"pages/Add.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../Context":"Context.js","../components/PostComments":"components/PostComments.js"}],"pages/Add.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34523,7 +34562,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50021" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61297" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
