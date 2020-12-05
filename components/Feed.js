@@ -14,7 +14,7 @@ export default function Feed() {
     const {posts} = state;
     
     return (
-        <div>
+        <div className="post">
             {posts.map((post) => (
                 <Post key={post.id} post={post}>
                     <PostHeader />

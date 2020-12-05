@@ -13,12 +13,13 @@ export default function PostComments() {
             {
                 post.comments.map(comment => {
                     const commenter = users.find(user => user.userId === comment.userId);
+                    console.log(commenter.userName);
                     return (
                         <div key={comment.id}>
-                            <div>
-                                <img src={commenter.userProfilePhoto} alt="commenter profile photo" />
+                            <div className="commenter">
+                                <img className="user_profile" src={commenter.userProfilePhoto} alt="commenter profile photo" />
                                 <h4>{commenter.userName}</h4>
-                                <span>{comment.date}</span>
+                                <span className="comment_date">{new Date(comment.date).toLocaleDateString()}</span>
                             </div>
                             <p>{comment.comment}</p>
                         </div>

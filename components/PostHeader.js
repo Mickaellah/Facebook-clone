@@ -4,10 +4,10 @@ import { PostContext } from '../components/Post';
 export default function PostHeader() {
     const { post, currentUserObj } = useContext(PostContext);
     return (
-        <div>
-            <img src={currentUserObj.userProfilePhoto} alt="profile photo" />
-            <span>{currentUserObj.userName}</span>
-            <span>{new Date(post.date).toLocaleDateString()}</span>
+        <div className="header">
+            <img className="user_profile" src={currentUserObj.userProfilePhoto} alt="profile photo" />
+            <h4>{currentUserObj.userName}</h4>
+            <span className="post_date">{new Date(post.date).toLocaleDateString()}</span>
         </div>
     )
 }

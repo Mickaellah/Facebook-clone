@@ -34294,7 +34294,13 @@ function PostLike() {
 
   var posts = state.posts,
       currentUser = state.currentUser;
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("button", null, "Unlike"), /*#__PURE__*/_react.default.createElement("button", null, "Like"), /*#__PURE__*/_react.default.createElement("span", null, posts.likes));
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "like"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    className: "button"
+  }, "Unlike"), /*#__PURE__*/_react.default.createElement("button", {
+    className: "button button_like"
+  }, "Like"), /*#__PURE__*/_react.default.createElement("span", null, posts.likes));
 }
 },{"react":"node_modules/react/index.js","../Context":"Context.js"}],"components/PostComments.js":[function(require,module,exports) {
 "use strict";
@@ -34326,12 +34332,18 @@ function PostComments() {
     var commenter = users.find(function (user) {
       return user.userId === comment.userId;
     });
+    console.log(commenter.userName);
     return /*#__PURE__*/_react.default.createElement("div", {
       key: comment.id
-    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "commenter"
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      className: "user_profile",
       src: commenter.userProfilePhoto,
       alt: "commenter profile photo"
-    }), /*#__PURE__*/_react.default.createElement("h4", null, commenter.userName), /*#__PURE__*/_react.default.createElement("span", null, comment.date)), /*#__PURE__*/_react.default.createElement("p", null, comment.comment));
+    }), /*#__PURE__*/_react.default.createElement("h4", null, commenter.userName), /*#__PURE__*/_react.default.createElement("span", {
+      className: "comment_date"
+    }, new Date(comment.date).toLocaleDateString())), /*#__PURE__*/_react.default.createElement("p", null, comment.comment));
   }));
 }
 },{"react":"node_modules/react/index.js","../Context":"Context.js","../components/Post":"components/Post.js"}],"components/PostDescription.js":[function(require,module,exports) {
@@ -34348,7 +34360,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function PostDescription(_ref) {
   var children = _ref.children;
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", null, children));
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h4", {
+    className: "post_description"
+  }, children));
 }
 },{"react":"node_modules/react/index.js"}],"components/PostImage.js":[function(require,module,exports) {
 "use strict";
@@ -34396,10 +34410,15 @@ function PostHeader() {
       post = _useContext.post,
       currentUserObj = _useContext.currentUserObj;
 
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "header"
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    className: "user_profile",
     src: currentUserObj.userProfilePhoto,
     alt: "profile photo"
-  }), /*#__PURE__*/_react.default.createElement("span", null, currentUserObj.userName), /*#__PURE__*/_react.default.createElement("span", null, new Date(post.date).toLocaleDateString()));
+  }), /*#__PURE__*/_react.default.createElement("h4", null, currentUserObj.userName), /*#__PURE__*/_react.default.createElement("span", {
+    className: "post_date"
+  }, new Date(post.date).toLocaleDateString()));
 }
 },{"react":"node_modules/react/index.js","../components/Post":"components/Post.js"}],"components/PostAddComment.js":[function(require,module,exports) {
 "use strict";
@@ -34428,13 +34447,17 @@ function PostAddComment() {
       post = _useContext2.post;
 
   var currentUser = state.currentUser;
-  return /*#__PURE__*/_react.default.createElement("form", null, /*#__PURE__*/_react.default.createElement("input", {
+  return /*#__PURE__*/_react.default.createElement("form", {
+    className: "add_comment_form"
+  }, /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     placeholder: "Type your comment here",
     required: true
-  }), /*#__PURE__*/_react.default.createElement("button", {
-    type: "submit"
-  }, "Post"));
+  }), /*#__PURE__*/_react.default.createElement("input", {
+    className: "submit_comment",
+    type: "submit",
+    placeholder: "Post"
+  }));
 }
 },{"react":"node_modules/react/index.js","../Context":"Context.js","../components/Post":"components/Post.js"}],"components/Feed.js":[function(require,module,exports) {
 "use strict";
@@ -34474,7 +34497,9 @@ function Feed() {
       dispatch = _useContext.dispatch;
 
   var posts = state.posts;
-  return /*#__PURE__*/_react.default.createElement("div", null, posts.map(function (post) {
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "post"
+  }, posts.map(function (post) {
     return /*#__PURE__*/_react.default.createElement(_Post.Post, {
       key: post.id,
       post: post
@@ -34720,7 +34745,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63285" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49806" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

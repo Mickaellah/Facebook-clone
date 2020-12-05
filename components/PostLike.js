@@ -6,9 +6,9 @@ export default function PostLike() {
     const {posts, currentUser} = state;
 
     return (
-        <div>
-            <button>Unlike</button>
-            <button>Like</button>
+        <div className="like">
+            <button className="button">Unlike</button>
+            <button className="button button_like">Like</button>
             <span>{posts.likes}</span>
         </div>
     )
