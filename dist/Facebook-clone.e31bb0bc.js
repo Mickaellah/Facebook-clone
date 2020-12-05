@@ -34148,7 +34148,11 @@ function Header() {
       state = _useContext.state,
       dispatch = _useContext.dispatch;
 
-  var users = state.users;
+  var users = state.users,
+      currentUser = state.currentUser;
+  var currentUserObj = users.find(function (user) {
+    return user.userId === currentUser;
+  });
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "main_heading"
   }, /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h1", null, "OnjaBook")), /*#__PURE__*/_react.default.createElement("nav", null, /*#__PURE__*/_react.default.createElement("ul", {
@@ -34161,19 +34165,17 @@ function Header() {
     className: "link"
   }, "Add post")), /*#__PURE__*/_react.default.createElement("li", {
     className: "list_item"
-  }, users.map(function (user) {
-    return /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-      to: "/option",
-      key: user.userId,
-      className: "link link_user"
-    }, /*#__PURE__*/_react.default.createElement("p", {
-      className: "username"
-    }, user.userName), /*#__PURE__*/_react.default.createElement("img", {
-      className: "user_profile",
-      src: user.userProfilePhoto,
-      alt: "User profile"
-    }));
-  })))));
+  }, currentUserObj && /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/option"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "options"
+  }, /*#__PURE__*/_react.default.createElement("p", {
+    className: "username"
+  }, currentUserObj.userName), /*#__PURE__*/_react.default.createElement("img", {
+    className: "user_profile",
+    src: currentUserObj.userProfilePhoto,
+    alt: "Profile photo"
+  })))))));
 }
 },{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../Context":"Context.js"}],"components/Post.js":[function(require,module,exports) {
 "use strict";
@@ -34275,7 +34277,6 @@ function PostComments() {
     var commenter = users.find(function (user) {
       return user.userId === comment.userId;
     });
-    console.log(commenter.userName);
     return /*#__PURE__*/_react.default.createElement("div", {
       key: comment.id
     }, /*#__PURE__*/_react.default.createElement("div", {
@@ -34351,7 +34352,9 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function PostHeader() {
   var _useContext = (0, _react.useContext)(_Post.PostContext),
       post = _useContext.post,
-      currentUserObj = _useContext.currentUserObj;
+      currentUserObj = _useContext.currentUserObj; // console.log(currentUserObj.userName);
+  // console.log(currentUserObj);
+
 
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "header"
@@ -34686,7 +34689,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51415" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56447" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

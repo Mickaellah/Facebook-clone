@@ -13,7 +13,6 @@ export default function PostComments() {
             {
                 post.comments.map(comment => {
                     const commenter = users.find(user => user.userId === comment.userId);
-                    console.log(commenter.userName);
                     return (
                         <div key={comment.id}>
                             <div className="commenter">

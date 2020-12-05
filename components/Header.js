@@ -4,7 +4,8 @@ import {Context} from '../Context';
 
 export default function Header() {
     const {state, dispatch} = useContext(Context);
-    const {users} = state;
+    const {users, currentUser} = state;
+    const currentUserObj = users.find(user => user.userId === currentUser);
     return (
         <div className="main_heading">
             <header>
@@ -26,14 +27,18 @@ export default function Header() {
                     </li>
                     <li className="list_item">
                         {
-                            users.map((user) => {
-                                return (
-                                    <Link to="/option" key={user.userId} className="link link_user">
-                                        <p className="username">{user.userName}</p>
-                                        <img className="user_profile" src={user.userProfilePhoto} alt="User profile" />
-                                    </Link>
-                                )
-                            })
+                            currentUserObj && (
+                                <Link to="/option">
+                                    <div className="options">
+                                        <p className="username">{currentUserObj.userName}</p>
+                                        <img 
+                                            className="user_profile"
+                                            src={currentUserObj.userProfilePhoto}
+                                            alt="Profile photo"
+                                        />
+                                    </div>
+                                </Link>
+                            )
                         }
                     </li>
                 </ul>
