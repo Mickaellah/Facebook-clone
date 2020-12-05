@@ -53,6 +53,36 @@ function reducer(state, action) {
                 users: newUser
             }
         }
+        case "LIKE": {
+            const newPosts = state.posts.map(post => {
+                if (post.id === action.id) {
+                    return {
+                        ...post,
+                        likes: [...post.likes, action.newLike],
+                    };
+                }
+                return post;
+            });
+            return {
+                ...state,
+                posts: newPosts,
+            };
+        }
+        case "UNLIKE": {
+            const newPosts = state.posts.map(post => {
+                if (post.id === action.id) {
+                    return {
+                        ...post,
+                        likes: post.likes.filter(like => like.userId !== state.currentUser),
+                    };
+                }
+                return post;
+            });
+            return {
+                ...state,
+                posts: newPosts,
+            };
+        }
     }
     return state
 }
@@ -85,21 +115,6 @@ function ContextProvider(props) {
         localStorage.setItem('users', JSON.stringify(users));
     }, [users]);
 
-    function addNewComment(e, id) {
-        e.preventDefault();
-        const {comment} = e.target;
-
-        const newComment = {
-            "id": Date.now(),
-            "userId": 1606827064330,
-            "comment": comment.value,
-            "date": new Date(Date.now()).toDateString()
-        }
-
-        dispatch({type: "ADD_COMMENT", comment: newComment, id: id});
-        e.target.reset();
-    }
-
     function addNewPost(e) {
         e.preventDefault();
         const {legend, image} = e.target;
@@ -126,13 +141,8 @@ function ContextProvider(props) {
         e.target.reset();
     }
 
-    function handleNewComments(e) {
-        e.preventDefault();
-        dispatch({type: "ADD_COMMENT", comments: e.target.value})
-    }
-
     return (
-        <Context.Provider value={{state, dispatch, handleNewComments, addNewPost, addNewComment}}>
+        <Context.Provider value={{state, dispatch, addNewPost}}>
             {props.children}
         </Context.Provider>
     )

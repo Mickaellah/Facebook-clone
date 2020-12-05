@@ -71,6 +71,10 @@ h4 {
     margin-inline-start: 16px;
 }
 
+.post_likes {
+    margin-inline-start: 16px;
+}
+
 .user_name {
     margin-block-start: 0;
     margin-inline-start: 64px;

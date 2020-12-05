@@ -5,8 +5,8 @@ import { PostContext } from '../components/Post';
 
 export default function PostComments() {
     const { post } = useContext(PostContext);
-    const {state} = useContext(Context);
-    const {users} = state;
+    const { state } = useContext(Context);
+    const { users } = state;
 
     return (
         <div>

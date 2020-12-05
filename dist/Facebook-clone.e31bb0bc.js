@@ -33874,7 +33874,7 @@ module.exports = [{
     "date": 1607149833505
   }, {
     "id": 2,
-    "userId": 1,
+    "userId": 2,
     "comment": "Nice",
     "date": 1607149853735
   }]
@@ -34028,6 +34028,41 @@ function reducer(state, action) {
           users: newUser
         });
       }
+
+    case "LIKE":
+      {
+        var newPosts = state.posts.map(function (post) {
+          if (post.id === action.id) {
+            return _objectSpread(_objectSpread({}, post), {}, {
+              likes: [].concat(_toConsumableArray(post.likes), [action.newLike])
+            });
+          }
+
+          return post;
+        });
+        return _objectSpread(_objectSpread({}, state), {}, {
+          posts: newPosts
+        });
+      }
+
+    case "UNLIKE":
+      {
+        var _newPosts = state.posts.map(function (post) {
+          if (post.id === action.id) {
+            return _objectSpread(_objectSpread({}, post), {}, {
+              likes: post.likes.filter(function (like) {
+                return like.userId !== state.currentUser;
+              })
+            });
+          }
+
+          return post;
+        });
+
+        return _objectSpread(_objectSpread({}, state), {}, {
+          posts: _newPosts
+        });
+      }
   }
 
   return state;
@@ -34064,23 +34099,6 @@ function ContextProvider(props) {
     localStorage.setItem('users', JSON.stringify(users));
   }, [users]);
 
-  function addNewComment(e, id) {
-    e.preventDefault();
-    var comment = e.target.comment;
-    var newComment = {
-      "id": Date.now(),
-      "userId": 1606827064330,
-      "comment": comment.value,
-      "date": new Date(Date.now()).toDateString()
-    };
-    dispatch({
-      type: "ADD_COMMENT",
-      comment: newComment,
-      id: id
-    });
-    e.target.reset();
-  }
-
   function addNewPost(e) {
     e.preventDefault();
     var _e$target = e.target,
@@ -34107,21 +34125,11 @@ function ContextProvider(props) {
     e.target.reset();
   }
 
-  function handleNewComments(e) {
-    e.preventDefault();
-    dispatch({
-      type: "ADD_COMMENT",
-      comments: e.target.value
-    });
-  }
-
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
     value: {
       state: state,
       dispatch: dispatch,
-      handleNewComments: handleNewComments,
-      addNewPost: addNewPost,
-      addNewComment: addNewComment
+      addNewPost: addNewPost
     }
   }, props.children);
 }
@@ -34228,6 +34236,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _Context = require("../Context");
 
+var _Post = require("../components/Post");
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -34235,19 +34245,51 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function PostLike() {
   var _useContext = (0, _react.useContext)(_Context.Context),
       state = _useContext.state,
-      dispacth = _useContext.dispacth;
+      dispatch = _useContext.dispatch;
 
-  var posts = state.posts,
-      currentUser = state.currentUser;
+  var _useContext2 = (0, _react.useContext)(_Post.PostContext),
+      post = _useContext2.post;
+
+  var currentUser = state.currentUser;
+
+  function likedOrNot() {
+    return post.likes.some(function (like) {
+      return like.userId === currentUser;
+    });
+  }
+
+  function updateLike() {
+    var newLike = {
+      likeId: Date.now(),
+      userId: currentUser
+    };
+    dispatch({
+      type: "LIKE",
+      newLike: newLike,
+      id: post.id
+    });
+  }
+
+  function unLikePost() {
+    dispatch({
+      type: "UNLIKE",
+      id: post.is
+    });
+  }
+
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "like"
-  }, /*#__PURE__*/_react.default.createElement("button", {
+  }, likedOrNot() ? /*#__PURE__*/_react.default.createElement("button", {
+    onClick: unLikePost,
     className: "button"
-  }, "Unlike"), /*#__PURE__*/_react.default.createElement("button", {
+  }, "Unlike") : /*#__PURE__*/_react.default.createElement("button", {
+    onClick: updateLike,
     className: "button button_like"
-  }, "Like"), /*#__PURE__*/_react.default.createElement("span", null, posts.likes));
+  }, "Like"), /*#__PURE__*/_react.default.createElement("span", {
+    className: "post_likes"
+  }, post.likes.length));
 }
-},{"react":"node_modules/react/index.js","../Context":"Context.js"}],"components/PostComments.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../Context":"Context.js","../components/Post":"components/Post.js"}],"components/PostComments.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34384,7 +34426,24 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function PostAddComment() {
+  var _useState = (0, _react.useState)(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      newComment = _useState2[0],
+      setNewComment = _useState2[1];
+
   var _useContext = (0, _react.useContext)(_Context.Context),
       state = _useContext.state,
       dispatch = _useContext.dispatch;
@@ -34393,10 +34452,36 @@ function PostAddComment() {
       post = _useContext2.post;
 
   var currentUser = state.currentUser;
+
+  function addNewComment(e) {
+    e.preventDefault();
+    var newComment = {
+      id: Date.now(),
+      userId: currentUser,
+      comment: newComment,
+      date: Date.now()
+    };
+    dispatch({
+      type: "ADD_COMMENT",
+      id: post.id,
+      newComment: newComment
+    });
+    setNewComment('');
+  } // function handleNewComments(e) {
+  //     e.preventDefault();
+  //     dispatch({type: "ADD_COMMENT", comments: e.target.value})
+  // }
+
+
   return /*#__PURE__*/_react.default.createElement("form", {
+    onSubmit: addNewComment,
     className: "add_comment_form"
   }, /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
+    value: newComment,
+    onChange: function onChange(e) {
+      return setNewComment(e.target.value);
+    },
     placeholder: "Type your comment here",
     required: true
   }), /*#__PURE__*/_react.default.createElement("input", {
